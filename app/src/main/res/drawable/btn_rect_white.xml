@@ -4,10 +4,10 @@
     <stroke android:width="2dp" android:color="#00000000" />
 
     <padding
-        android:top="16dp"
-        android:bottom="16dp" />
+        android:top="4dp"
+        android:bottom="4dp" />
 
-    <corners android:radius="33dp" />
+    <corners android:radius="8dp" />
 
     <solid android:color="#FFF" />
 

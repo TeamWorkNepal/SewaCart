@@ -1,6 +1,7 @@
 package sewacart.com.sewacart.activity;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
@@ -9,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,9 +19,9 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.fragments.HomeFragment;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
+import sewacart.com.sewacart.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custumBarLayout = layoutInflater.inflate(R.layout.cutom_toolbar, null);
         actionBar.setCustomView(custumBarLayout);
-        cartIcon = custumBarLayout.findViewById(R.id.my_cart);
-        cartIcon.setVisibility(View.VISIBLE);
+     //   cartIcon = custumBarLayout.findViewById(R.id.my_cart);
+      //  cartIcon.setVisibility(View.VISIBLE);
+
+
 
         bottomNavigation.inflateMenu(R.menu.bottom_navigation_main);
         bottomNavigation.setItemBackgroundResource(R.color.colorPrimary);

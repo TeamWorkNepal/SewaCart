@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Sewa Cart</string>
+
+    <string-array name="addresses">
+        <item>Kathmandu</item>
+        <item>Pokhara</item>
+        <item>Kritipur</item>
+        <item>Bhaktapur</item>
+        <item>Lalitpur</item>
+    </string-array>
+
+
+    <string-array name="service_lists">
+        <item>Wedding and Events</item>
+        <item>Beautician Service</item>
+        <item>Tutors</item>
+        <item>Business services</item>
+        <item>Health and Fitness</item>
+        <item>Home Cleaning and Repairing</item>
+        <item>Electronics appliances and Reparing</item>
+    </string-array>
+    <string-array name="second_level_service">
+        <item>Ac Service</item>
+        <item>Refigrator</item>
+        <item>Television  Repair</item>
+        <item>laptop Repair</item>
+        <item>Computer Rapair</item>
+        <item>Lawyer</item>
+        <item>Graphics Designer</item>
+        <item>Web Designer</item>
+        <item>Lawyer</item>
+        <item>Tax Service</item>
+        <item>Vastu Shastra</item>
+    </string-array>
+
 </resources>
