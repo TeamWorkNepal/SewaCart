@@ -1,5 +1,6 @@
 package sewacart.com.sewacart.activity.test;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +10,23 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.activity.LoginActivity;
 import sewacart.com.sewacart.adapter.ProfileViewPagerAdapter;
 
 public class ServiceProviderDetails extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+    @BindView(R.id.add_to_cart)
+    Button addToCart;
+    @BindView(R.id.service_provider_book_now)
+    Button serviceProviderBookNow;
+
     private Toolbar toolbar;
+
     CollapsingToolbarLayout collapsingToolbarLayout = null;
     ViewPager mViewPager;
     ProfileViewPagerAdapter profileViewPagerAdapter;
@@ -24,6 +36,7 @@ public class ServiceProviderDetails extends AppCompatActivity implements ViewPag
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider_details);
+        ButterKnife.bind(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
@@ -44,12 +57,13 @@ public class ServiceProviderDetails extends AppCompatActivity implements ViewPag
         mViewPager = findViewById(R.id.viewpager);
         mTabLayout.setupWithViewPager(mViewPager);
 
-       //collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profileExpandedAppBar);
+        //collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.profileExpandedAppBar);
         //collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
         profileViewPagerAdapter = new ProfileViewPagerAdapter(getSupportFragmentManager(), 1, this);
         mViewPager.setAdapter(profileViewPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
+
 
     }
 
@@ -67,5 +81,18 @@ public class ServiceProviderDetails extends AppCompatActivity implements ViewPag
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+
+    @OnClick({R.id.add_to_cart, R.id.service_provider_book_now})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.add_to_cart:
+                startActivity(new Intent(ServiceProviderDetails.this, CartActivity.class));
+                break;
+            case R.id.service_provider_book_now:
+                startActivity(new Intent(ServiceProviderDetails.this, LoginActivity.class));
+                break;
+        }
     }
 }

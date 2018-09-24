@@ -1,6 +1,7 @@
 package sewacart.com.sewacart.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.activity.test.ProviderDashboard;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
 import sewacart.com.sewacart.fragments.HomeFragment;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     CategoryFragment categoryFragment;
     ContactFragment contactFragment;
-    ImageView cartIcon;
+    ImageView cartIcon, hambuger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,15 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custumBarLayout = layoutInflater.inflate(R.layout.cutom_toolbar, null);
         actionBar.setCustomView(custumBarLayout);
-     //   cartIcon = custumBarLayout.findViewById(R.id.my_cart);
-      //  cartIcon.setVisibility(View.VISIBLE);
-
+        //   cartIcon = custumBarLayout.findViewById(R.id.my_cart);
+        hambuger = custumBarLayout.findViewById(R.id.hambuger);
+        //  cartIcon.setVisibility(View.VISIBLE);
+        hambuger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
+            }
+        });
 
 
         bottomNavigation.inflateMenu(R.menu.bottom_navigation_main);

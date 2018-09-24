@@ -34,7 +34,7 @@ public class ServiceListingActivity extends AppCompatActivity {
             }
         });
 
-        setTitle("Services");
+
         ArrayAdapter adapter = ArrayAdapter.createFromResource(ServiceListingActivity.this, R.array.second_level_service, android.R.layout.simple_list_item_1);
         listView.setAdapter(adapter);
 
