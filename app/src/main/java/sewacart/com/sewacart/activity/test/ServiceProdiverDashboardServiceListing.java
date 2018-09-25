@@ -3,13 +3,11 @@ package sewacart.com.sewacart.activity.test;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,33 +17,26 @@ import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
 import sewacart.com.sewacart.controllers.ControllerPixels;
 
-public class CartActivity extends AppCompatActivity {
-
-    @BindView(R.id.toolbar_main_activity)
+public class ServiceProdiverDashboardServiceListing extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.table)
     TableLayout table;
-    @BindView(R.id.checkOut)
-    Button checkOut;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_service_provider_dashboard_listing);
         ButterKnife.bind(this);
 
-        table = (TableLayout) findViewById(R.id.table);
-        setTitle("Cart List");
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar.setTitle(getIntent().getStringExtra("key"));
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartActivity.super.onBackPressed();
+                ServiceProdiverDashboardServiceListing.super.onBackPressed();
             }
         });
     }
@@ -55,28 +46,35 @@ public class CartActivity extends AppCompatActivity {
         super.onStart();
 
 
-        TableRow topTableRow = new TableRow(CartActivity.this);
-        int dp = (int) ControllerPixels.convertDpToPixel(16, CartActivity.this);
-        int smallmargin = (int) ControllerPixels.convertDpToPixel(5, CartActivity.this);
+        TableRow topTableRow = new TableRow(ServiceProdiverDashboardServiceListing.this);
+        int dp = (int) ControllerPixels.convertDpToPixel(16, ServiceProdiverDashboardServiceListing.this);
+        int smallmargin = (int) ControllerPixels.convertDpToPixel(5, ServiceProdiverDashboardServiceListing.this);
+
+        TextView sn = new TextView(ServiceProdiverDashboardServiceListing.this);
+        sn.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
+        sn.setText("S.n");
+        sn.setGravity(Gravity.CENTER);
+        sn.setTypeface(null, Typeface.BOLD);
+        sn.setTextSize(15f);
+        sn.setPadding(smallmargin, dp, smallmargin, dp);
+        sn.setBackgroundResource(R.drawable.border);
 
 
-        TextView topproduct = new TextView(CartActivity.this);
+        TextView topproduct = new TextView(ServiceProdiverDashboardServiceListing.this);
         topproduct.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 4.0f));
-        topproduct.setText("Product");
+        topproduct.setText("Service");
         topproduct.setPadding(smallmargin, dp, smallmargin, dp);
         topproduct.setTextSize(15f);
         topproduct.setGravity(Gravity.CENTER);
         topproduct.setTypeface(null, Typeface.BOLD);
         topproduct.setMaxLines(1);
-        topproduct.setMaxWidth((int) ControllerPixels.convertDpToPixel(200, CartActivity.this));
+        topproduct.setMaxWidth((int) ControllerPixels.convertDpToPixel(200, ServiceProdiverDashboardServiceListing.this));
         topproduct.setBackgroundResource(R.drawable.border);
 
 
-
-
-        TextView topqty = new TextView(CartActivity.this);
+        TextView topqty = new TextView(ServiceProdiverDashboardServiceListing.this);
         topqty.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-        topqty.setText("Price");
+        topqty.setText("C. Name");
         topqty.setGravity(Gravity.CENTER);
         topqty.setTypeface(null, Typeface.BOLD);
         topqty.setTextSize(15f);
@@ -84,19 +82,29 @@ public class CartActivity extends AppCompatActivity {
         topqty.setBackgroundResource(R.drawable.border);
 
 
-        TextView topempty = new TextView(CartActivity.this);
+        TextView topempty = new TextView(ServiceProdiverDashboardServiceListing.this);
         topempty.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-        topempty.setText("Action");
+        topempty.setText("C. Address");
         topempty.setTextSize(15f);
         topempty.setGravity(Gravity.CENTER);
         topempty.setTypeface(null, Typeface.BOLD);
         topempty.setPadding(smallmargin, dp, smallmargin, dp);
         topempty.setBackgroundResource(R.drawable.border);
 
+       /* TextView phone = new TextView(ServiceProdiverDashboardServiceListing.this);
+        phone.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
+        phone.setText("Phone");
+        phone.setTextSize(15f);
+        phone.setGravity(Gravity.CENTER);
+        phone.setTypeface(null, Typeface.BOLD);
+        phone.setPadding(smallmargin, dp, smallmargin, dp);
+        phone.setBackgroundResource(R.drawable.border);*/
 
+        topTableRow.addView(sn);
         topTableRow.addView(topproduct);
         topTableRow.addView(topqty);
         topTableRow.addView(topempty);
+       // topTableRow.addView(phone);
 
         if (topTableRow.getParent() != null)
             ((ViewGroup) topTableRow.getParent()).removeView(topTableRow);

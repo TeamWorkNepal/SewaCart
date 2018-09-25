@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FAFAFA">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -18,9 +17,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/toolbar2"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,6 +30,7 @@
             android:weightSum="2">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/wrapper_new_job"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginEnd="8dp"
@@ -37,36 +38,51 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:clickable="true">
+                android:clickable="true"
+                app:cardBackgroundColor="#363841"
+                app:cardCornerRadius="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/new_job_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_above="@id/new_job_count"
                         android:text="New Job"
                         android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
+                        android:textColor="#FFF"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/new_job_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/new_job_title"
+                        android:layout_centerInParent="true"
                         android:layout_marginTop="5dp"
                         android:text="125"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="#FFF"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/icon_new_job" />
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/wrapper_pending_job"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginEnd="16dp"
@@ -74,32 +90,45 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:clickable="true">
+                android:clickable="true"
+                app:cardBackgroundColor="#26a69a"
+                app:cardCornerRadius="10dp">
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/pending_job_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pending Job"
+                        android:textColor="#FFF"
+                        android:textSize="17sp"
                         android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
+                        android:layout_above="@id/pending_job_count"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/pending_job_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/pending_job_title"
+
                         android:layout_marginTop="5dp"
                         android:text="25"
-                        android:textAlignment="center" />
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:textColor="#FFF"
+                        android:textSize="30sp" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/icon_pending" />
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
@@ -114,6 +143,7 @@
             android:weightSum="2">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/wapper_completed_job"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginEnd="8dp"
@@ -122,12 +152,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:clickable="true">
+                android:clickable="true"
+                app:cardBackgroundColor="#5c6bc0"
+                app:cardCornerRadius="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/completed_job_title"
@@ -135,23 +166,35 @@
                         android:layout_height="wrap_content"
                         android:text="Complete Job"
                         android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
+                        android:textColor="#FFF"
+                        android:textSize="17sp"
+                        android:layout_above="@+id/completed_job_count"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/completed_job_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/completed_job_title"
                         android:layout_marginTop="5dp"
                         android:text="13"
-                        android:textAlignment="center" />
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:textColor="#FFF"
+                        android:textSize="30sp" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/icon_job_completed" />
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/wrapper_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginEnd="16dp"
@@ -160,13 +203,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:clickable="true">
+                android:clickable="true"
+                app:cardBackgroundColor="#64bc36"
+                app:cardCornerRadius="10dp">
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/balance"
@@ -175,18 +219,31 @@
                         android:layout_centerInParent="true"
                         android:text="Remaining Balance"
                         android:textAlignment="center"
-                        android:textColor="#000"
-                        android:textSize="20sp"
+                        android:textColor="#FFF"
+                        android:textSize="17sp"
+                        android:layout_above="@+id/balance_count"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/balance_count"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/balance"
+
                         android:layout_marginTop="5dp"
                         android:text="Rs. 2333 "
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="#FFF"
+                        android:layout_centerInParent="true"
+                        android:textSize="30sp" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/icon_balance" />
 
                 </RelativeLayout>
 
