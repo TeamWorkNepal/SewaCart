@@ -6,14 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
 
 public class ProfileEditActivity extends AppCompatActivity {
     Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        ButterKnife.bind(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
 
@@ -26,5 +29,6 @@ public class ProfileEditActivity extends AppCompatActivity {
                 ProfileEditActivity.super.onBackPressed();
             }
         });
+
     }
 }
