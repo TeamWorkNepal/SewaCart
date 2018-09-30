@@ -6,6 +6,8 @@
     <color name="colorPrimaryDarkBelow">#000</color>
     <color name="border_color">#11000000</color>
 
+    <color name="desired_color">#000</color>
+
 
     <color name="tab_background_selected">#2a86a1</color>
     <color name="tab_background_unselected">#2d95b3</color>

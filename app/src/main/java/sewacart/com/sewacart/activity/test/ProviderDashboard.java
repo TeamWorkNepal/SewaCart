@@ -62,10 +62,7 @@ public class ProviderDashboard extends AppCompatActivity {
                 intent.putExtra("key","Completed Job");
                 startActivity(intent);
                 break;
-            case R.id.wrapper_balance:
-                intent = new Intent(ProviderDashboard.this,ProfileActivity.class);
-                startActivity(intent);
-                break;
+
         }
     }
 }

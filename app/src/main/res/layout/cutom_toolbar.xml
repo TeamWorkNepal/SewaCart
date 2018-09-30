@@ -13,11 +13,11 @@
         android:id="@+id/hambuger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/icon_ham" />
-
+        android:src="@drawable/icon_ham"
+        android:visibility="gone" />
 
 
     <ImageView
@@ -30,16 +30,14 @@
         android:src="@drawable/logo" />
 
 
-
-
     <ImageView
         android:id="@+id/my_cart"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/icon_cart"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/icon_cart" />
 </RelativeLayout>

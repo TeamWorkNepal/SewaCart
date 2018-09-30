@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,13 +23,14 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.activity.test.AddServiceActivty;
+import sewacart.com.sewacart.activity.test.ProfileActivity;
 import sewacart.com.sewacart.activity.test.ProviderDashboard;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
 import sewacart.com.sewacart.fragments.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
-
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigation;
@@ -36,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     CategoryFragment categoryFragment;
     ContactFragment contactFragment;
     ImageView cartIcon, hambuger;
+
+    @BindView(R.id.nav_view)
+    NavigationView navView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +61,52 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.icon_ham);
+
         setTitle("");
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custumBarLayout = layoutInflater.inflate(R.layout.cutom_toolbar, null);
         actionBar.setCustomView(custumBarLayout);
         //   cartIcon = custumBarLayout.findViewById(R.id.my_cart);
-        hambuger = custumBarLayout.findViewById(R.id.hambuger);
+       /* hambuger = custumBarLayout.findViewById(R.id.hambuger);
         //  cartIcon.setVisibility(View.VISIBLE);
         hambuger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
+                startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
             }
         });
+*/
 
+        navView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+
+                        drawerLayout.closeDrawers();
+
+                        switch (item.getItemId()) {
+
+                            case R.id.dashboard:
+                                startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
+                                return true;
+                            case R.id.listing:
+                                startActivity(new Intent(MainActivity.this,AddServiceActivty.class));
+                                return true;
+                            case R.id.profile:
+                                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                                return true;
+                        }
+
+
+                        return true;
+
+
+                    }
+                });
 
         bottomNavigation.inflateMenu(R.menu.bottom_navigation_main);
         bottomNavigation.setItemBackgroundResource(R.color.colorPrimary);
@@ -112,5 +152,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
 
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="sewacart.com.sewacart">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,7 +11,8 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/customTheme">
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +20,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.ServiceListingActivity"
+        <activity
+            android:name=".activity.ServiceListingActivity"
+            android:theme="@style/customTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.test.AddServiceActivty"
+            android:theme="@style/customTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.test.ProviderDashboard"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +45,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.test.ProviderDashboard"
+        <activity
+            android:name=".activity.test.TestServiceProviderListingItem"
+            android:theme="@style/customTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.test.ServiceProviderDetails"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,22 +62,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.test.TestServiceProviderListingItem"
-            android:theme="@style/customTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.test.ServiceProviderDetails"
-            android:theme="@style/customTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".activity.test.CartActivity"
+        <activity
+            android:name=".activity.test.CartActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,28 +71,32 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.test.ServiceProdiverDashboardServiceListing"
+        <activity
+            android:name=".activity.test.ServiceProdiverDashboardServiceListing"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.test.ProfileActivity"
+        <activity
+            android:name=".activity.test.ProfileActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.test.ProfileEditActivity"
+        <activity
+            android:name=".activity.test.ProfileEditActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"
+        <activity
+            android:name=".activity.LoginActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -86,7 +104,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.SignupActivity"
+        <activity
+            android:name=".activity.SignupActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
