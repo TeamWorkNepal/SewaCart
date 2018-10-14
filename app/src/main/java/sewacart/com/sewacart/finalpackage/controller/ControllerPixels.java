@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.controllers;
+package sewacart.com.sewacart.finalpackage.controller;
 
 import android.content.Context;
 import android.content.res.Resources;

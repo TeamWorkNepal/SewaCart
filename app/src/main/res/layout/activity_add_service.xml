@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_main_activity"
@@ -12,151 +12,171 @@
         android:elevation="2dp"
         app:title="Add Services" />
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="#FFF"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Listing Title :"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/listing_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_tag_border"
-            android:hint="Enter the listed title"
-            android:padding="10dp" />
-
-        <EditText
-            android:id="@+id/tagline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/price_tag_border"
-            android:hint="Write a suitable tagline"
-            android:padding="10dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Listing Category :"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_tag_border"
-            android:hint="Choose your Business Category"
-            android:padding="10dp" />
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="16dp">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="City :"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Listing Title :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/listing_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Enter the listed title"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/tagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/price_tag_border"
+                android:hint="Write a suitable tagline"
+                android:padding="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Listing Category :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Choose your Business Category"
+                android:padding="10dp" />
 
 
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_tag_border"
-            android:hint="Your City Name"
-            android:padding="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="City :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Phone :"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Your City Name"
+                android:padding="10dp" />
 
 
-        <EditText
-            android:id="@+id/telephone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_tag_border"
-            android:hint="Your phone number"
-            android:padding="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Phone :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Full Address :"
-            android:textColor="#000"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/telephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Your phone number"
+                android:padding="10dp" />
 
 
-        <EditText
-            android:id="@+id/state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_tag_border"
-            android:hint="Add your location"
-            android:padding="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Full Address :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Description"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Some Words About Me"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Add your location"
+                android:padding="10dp" />
 
 
-        <EditText
-            android:id="@+id/about_me"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/price_tag_border"
-            android:hint="Detail Description about your service"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLines="4"
-            android:padding="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Description :"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Some Words About Me"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/about_me"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/price_tag_border"
+                android:hint="Detail Description about your service"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="4"
+                android:padding="10dp" />
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                app:mrl_rippleBackground="#FFFFFF"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleRoundedCorners="33dp">
+
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_rect"
+                    android:text="Submit"
+                    android:textColor="#FFF" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

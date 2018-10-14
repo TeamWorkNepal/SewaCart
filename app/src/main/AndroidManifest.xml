@@ -7,16 +7,18 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
+        android:name=".finalpackage.activity.MyApplication"
         android:label="@string/app_name"
+        tools:replace="android:icon"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/customTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".finalpackage.activity.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -63,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".activity.test.CartActivity"
+            android:name=".finalpackage.activity.CartActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,7 +82,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.test.ProfileActivity"
+            android:name=".finalpackage.activity.ProfileActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,7 +90,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.test.ProfileEditActivity"
+            android:name=".finalpackage.activity.ProfileEditActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -96,7 +98,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".finalpackage.activity.LoginActivity"
+            android:theme="@style/customTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SignupActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -105,7 +116,7 @@
         </activity>
 
         <activity
-            android:name=".activity.SignupActivity"
+            android:name=".finalpackage.activity.RegisterActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

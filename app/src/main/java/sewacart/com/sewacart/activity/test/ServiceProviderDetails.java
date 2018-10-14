@@ -16,7 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.activity.LoginActivity;
+import sewacart.com.sewacart.finalpackage.activity.CartActivity;
+import sewacart.com.sewacart.finalpackage.activity.LoginActivity;
 import sewacart.com.sewacart.adapter.ProfileViewPagerAdapter;
 
 public class ServiceProviderDetails extends AppCompatActivity implements ViewPager.OnPageChangeListener {

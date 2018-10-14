@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.activity.test;
+package sewacart.com.sewacart.finalpackage.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.controllers.ControllerPixels;
+import sewacart.com.sewacart.finalpackage.controller.ControllerPixels;
 
 public class CartActivity extends AppCompatActivity {
 

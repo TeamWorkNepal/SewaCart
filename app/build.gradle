@@ -37,10 +37,15 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-
+    // For Sweet Alert
+    implementation project(':dialoges')
 
     // For Ripple Effect
-   // compile 'com.balysv:material-ripple:service_1.0.2'
+    compile 'com.balysv:material-ripple:1.0.2'
+
+    // Parcel
+    compile 'org.parceler:parceler-api:1.1.11'
+    annotationProcessor 'org.parceler:parceler:1.1.11'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

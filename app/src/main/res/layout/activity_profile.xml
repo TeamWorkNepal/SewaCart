@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -27,185 +28,263 @@
             android:src="@drawable/icon_edit" />
     </android.support.v7.widget.Toolbar>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/provider_image"
-        app:civ_border_color="#000"
-        app:civ_border_width="1dp"
-        app:layout_collapseMode="parallax" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Gaurav Man Shrestha"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="Interior and Renovation"
-        android:textSize="13sp"
-        android:textStyle="bold" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFF">
+        android:background="#FFF"
+        android:paddingBottom="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:background="#FFF"
+
+            android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:background="#FAFAFA"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="175dp"
+                    android:layout_height="175dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/default_user"
+                    app:civ_border_color="#000"
+                    app:civ_border_width="1dp"
+                    app:layout_collapseMode="parallax" />
+
+                <TextView
+                    android:id="@+id/profile_name_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Interior and Renovation"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sam Anderson" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
 
-            <View
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
 
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
+                <View
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sam.Anderson@gmail.com" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
 
-            <View
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+                <TextView
+                    android:id="@+id/profile_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
 
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
+                <View
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="+01 4561 3214" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
 
-            <View
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date of birth :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="03 Jun 1990" />
-
-            <View
-
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
+                <TextView
+                    android:id="@+id/profile_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Address :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                <View
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="8800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A." />
-
-            <View
-
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status :"
-                android:textColor="#000"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Inactive"
-                android:textColor="#FF0000" />
-
-            <View
-
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color" />
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="State :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="City :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Street :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_street"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

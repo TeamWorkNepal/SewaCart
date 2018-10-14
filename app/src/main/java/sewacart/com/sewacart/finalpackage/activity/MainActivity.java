@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.activity;
+package sewacart.com.sewacart.finalpackage.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
 import sewacart.com.sewacart.activity.test.AddServiceActivty;
-import sewacart.com.sewacart.activity.test.ProfileActivity;
 import sewacart.com.sewacart.activity.test.ProviderDashboard;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
@@ -79,30 +78,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
             }
         });
+
 */
+
 
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
 
-                        drawerLayout.closeDrawers();
 
+                        drawerLayout.closeDrawers();
                         switch (item.getItemId()) {
 
                             case R.id.dashboard:
                                 startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
                                 return true;
                             case R.id.listing:
-                                startActivity(new Intent(MainActivity.this,AddServiceActivty.class));
+                                startActivity(new Intent(MainActivity.this, AddServiceActivty.class));
                                 return true;
                             case R.id.profile:
                                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                                 return true;
                         }
+                        item.setChecked(false);
 
-
-                        return true;
+                        return false;
 
 
                     }

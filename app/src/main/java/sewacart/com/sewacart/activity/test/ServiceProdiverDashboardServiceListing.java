@@ -15,7 +15,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.controllers.ControllerPixels;
+import sewacart.com.sewacart.finalpackage.controller.ControllerPixels;
 
 public class ServiceProdiverDashboardServiceListing extends AppCompatActivity {
     Toolbar toolbar;

@@ -45,7 +45,7 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
 
-                    android:src="@drawable/provider_image"
+                    android:src="@drawable/default_user"
                     app:civ_border_color="#000"
                     app:civ_border_width="1dp"
                     app:layout_collapseMode="parallax" />
@@ -57,6 +57,7 @@
                     android:text="Gaurav Man Shrestha"
                     android:textColor="#000"
                     android:textSize="20sp"
+                    android:layout_marginBottom="5dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -66,6 +67,7 @@
                     android:gravity="center"
                     android:text="Interior and Renovation"
                     android:textSize="13sp"
+                    android:visibility="gone"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.AppCompatButton
@@ -115,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="Sam Anderson"
+                    android:hint=""
                     android:padding="10dp" />
 
 
@@ -134,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="Sam.Anderson@gmail.com"
+                    android:hint=""
                     android:padding="10dp" />
 
 
@@ -154,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="9841111111"
+                    android:hint=""
                     android:padding="10dp" />
 
 
@@ -174,7 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="+01 4561 3214"
+                    android:hint=""
                     android:padding="10dp" />
 
 
@@ -205,7 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="State 3"
+                    android:hint=""
                     android:padding="10dp" />
 
                 <TextView
@@ -224,34 +226,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="kalanki"
+                    android:hint=""
                     android:padding="10dp" />
+
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Zip :"
-                    android:textColor="#000"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-
-                <EditText
-                    android:id="@+id/zip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/price_tag_border"
-                    android:hint="46000"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Additional Address Line :"
+                    android:text="Address  :"
                     android:textColor="#000"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -262,7 +247,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
-                    android:hint="Additional Address"
+                    android:hint=""
                     android:padding="10dp" />
 
 
@@ -291,7 +276,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:background="@drawable/price_tag_border"
-                    android:hint="Detail Description of User"
+                    android:hint=""
                     android:inputType="textCapSentences|textMultiLine"
                     android:maxLines="4"
                     android:padding="10dp" />
