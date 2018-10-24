@@ -4,34 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar2"
-        style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#FFF"
-        app:layout_collapseMode="pin"
-        app:title=""
-        app:titleMarginStart="0dp"
-        app:titleTextColor="#000">
-
-        <ImageView
-            android:id="@+id/bluetoothState"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/icon_cart" />
-    </android.support.v7.widget.Toolbar>
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_margin="5dp"
         android:elevation="2dp">
 
 
@@ -46,8 +22,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/service_provider_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_marginBottom="16dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginLeft="10dp"
@@ -84,29 +60,54 @@
                                 android:id="@+id/service_provider_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Gaurav Man Shrestha"
+                                android:text=""
                                 android:textColor="#000"
                                 android:textSize="12sp"
+                                android:textStyle="bold"
                                 android:transitionName="sharedName" />
 
                             <TextView
                                 android:id="@+id/service_provider_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Interior and Renovation"
+                                android:text="Kathmandu"
                                 android:textSize="12sp"
                                 android:transitionName="sharedAddress" />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/border_color" />
+
+                        <TextView
+                            android:id="@+id/service_provider_service"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Interior designer"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="2dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/border_color" />
+
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:layout_weight="1">
 
                             <ImageView
                                 android:id="@+id/icon_person"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
                                 android:src="@drawable/icon_person" />
 
                             <TextView
@@ -115,40 +116,30 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginTop="5dp"
                                 android:layout_toEndOf="@id/icon_person"
                                 android:layout_toRightOf="@id/icon_person"
                                 android:gravity="center"
                                 android:text="Individual"
                                 android:textSize="12sp" />
 
-                            <TextView
-                                android:id="@+id/service_provider_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toEndOf="@id/provider_type"
-                                android:layout_toRightOf="@id/provider_type"
-                                android:background="@drawable/price_tag_border"
-                                android:padding="5dp"
-                                android:text="Rs 499 Per day"
-                                android:textColor="#FF0000"
-                                android:textSize="11sp"
-                                android:transitionName="sharedPrice" />
                         </RelativeLayout>
                     </LinearLayout>
+
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="10dp"
-                        android:background="@color/border_color" />
+                        android:background="@color/border_color"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal"
+                        android:visibility="gone"
                         android:weightSum="2">
 
                         <RatingBar
@@ -190,28 +181,6 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="5dp"
-                        android:text="SERVICES"
-                        android:textColor="#1592b5"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="INTERIOR DESIGNER"
-                        android:textSize="12sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -229,6 +198,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/service_provider_hour"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -253,12 +223,42 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/service_provider_exp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="4 years"
                         android:textSize="12sp" />
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:text="SERVICE COST"
+                        android:textColor="#1592b5"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/service_provider_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rs 499 Per day"
+                        android:textColor="#FF0000"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -272,13 +272,14 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/below_down"
+                android:layout_centerInParent="true"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/service_provider_details"
@@ -292,12 +293,16 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingStart="16dp"
+
                     android:text="Detail"
-                    android:textColor="#FFF" />
+                    android:textColor="#FFF"
+                    android:visibility="gone" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_rct_sewacart"
                     android:minHeight="0dp"

@@ -17,7 +17,7 @@ import sewacart.com.sewacart.activity.ServiceListingActivity;
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
     Context context;
 
-    public  ServiceAdapter(Context context) {
+    public ServiceAdapter(Context context) {
         this.context = context;
     }
 
@@ -34,7 +34,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         holder.holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, ServiceListingActivity.class));
+                   context.startActivity(new Intent(context, ServiceListingActivity.class));
             }
         });
     }

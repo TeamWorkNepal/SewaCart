@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
 import sewacart.com.sewacart.activity.test.AddServiceActivty;
 import sewacart.com.sewacart.activity.test.ProviderDashboard;
+import sewacart.com.sewacart.activity.test.TestServiceProviderListingItem;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
 import sewacart.com.sewacart.fragments.HomeFragment;
@@ -69,7 +70,13 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custumBarLayout = layoutInflater.inflate(R.layout.cutom_toolbar, null);
         actionBar.setCustomView(custumBarLayout);
-        //   cartIcon = custumBarLayout.findViewById(R.id.my_cart);
+        /* cartIcon = custumBarLayout.findViewById(R.id.my_cart);
+         cartIcon.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 startActivity(new Intent(MainActivity.this, TestServiceProviderListingItem.class));
+             }
+         });*/
        /* hambuger = custumBarLayout.findViewById(R.id.hambuger);
         //  cartIcon.setVisibility(View.VISIBLE);
         hambuger.setOnClickListener(new View.OnClickListener() {

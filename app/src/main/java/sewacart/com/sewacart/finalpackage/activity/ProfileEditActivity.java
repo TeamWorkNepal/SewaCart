@@ -239,6 +239,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
+                        pDialog.dismiss();
                         fallback();
                     }
                 });

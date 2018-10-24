@@ -1,28 +1,55 @@
 package sewacart.com.sewacart.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.activity.test.TestServiceProviderListingItem;
+import sewacart.com.sewacart.adapter.ServiceProviderAdapter;
+import sewacart.com.sewacart.finalpackage.activity.MainActivity;
+import sewacart.com.sewacart.finalpackage.activity.ProfileActivity;
+import sewacart.com.sewacart.finalpackage.controller.VerticalNewsPaddingController;
+import sewacart.com.sewacart.finalpackage.model.ProviderModel;
+import sewacart.com.sewacart.finalpackage.model.UserModel;
+import sewacart.com.sewacart.finalpackage.rest.ApiClient;
+import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 public class ServiceListingActivity extends AppCompatActivity {
-    ListView listView;
+
     Toolbar toolbar;
+
+    @BindView(R.id.service_rcy)
+    RecyclerView serviceRcy;
+    LinearLayoutManager mLayoutManager;
+    List<ProviderModel> providerModels = new ArrayList<>();
+    ServiceProviderAdapter serviceProviderAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_listing);
-        listView = findViewById(R.id.service_list);
 
+        setContentView(R.layout.activity_service_listing);
+        ButterKnife.bind(this);
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         setTitle("Services");
@@ -34,15 +61,52 @@ public class ServiceListingActivity extends AppCompatActivity {
             }
         });
 
+        serviceProviderAdapter = new ServiceProviderAdapter(ServiceListingActivity.this, providerModels);
+        serviceRcy.addItemDecoration(new VerticalNewsPaddingController(0));
+        mLayoutManager = new LinearLayoutManager(ServiceListingActivity.this);
+        serviceRcy.setLayoutManager(mLayoutManager);
+        loadServiceProviders();
+    }
 
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(ServiceListingActivity.this, R.array.second_level_service, android.R.layout.simple_list_item_1);
-        listView.setAdapter(adapter);
+    private void loadServiceProviders() {
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
+        Map<String, String> params = new HashMap<String, String>();
+        Call<List<ProviderModel>> call = userInterface.getProviders(params);
+        call.enqueue(new Callback<List<ProviderModel>>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(ServiceListingActivity.this, TestServiceProviderListingItem.class));
+            public void onResponse(@NonNull Call<List<ProviderModel>> call, @NonNull Response<List<ProviderModel>> response) {
+                pDialog.dismiss();
+                providerModels.addAll(response.body());
+                serviceRcy.setAdapter(serviceProviderAdapter);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<ProviderModel>> call, @NonNull Throwable t) {
+                pDialog.dismiss();
+                fallback();
             }
         });
     }
+
+    private void fallback() {
+        final SweetAlertDialog pDialog = new SweetAlertDialog(ServiceListingActivity.this, SweetAlertDialog.ERROR_TYPE);
+        pDialog.setTitleText("Oops...");
+        pDialog.setContentText("Something went wrong!");
+        pDialog.show();
+        pDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                startActivity(new Intent(ServiceListingActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+    }
+
 }

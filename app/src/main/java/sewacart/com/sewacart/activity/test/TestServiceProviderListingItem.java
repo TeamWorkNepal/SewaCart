@@ -30,11 +30,10 @@ public class TestServiceProviderListingItem extends AppCompatActivity {
         service_provider_image = findViewById(R.id.service_provider_image);
         service_provider_address = findViewById(R.id.service_provider_address);
         service_provider_name = findViewById(R.id.service_provider_name);
-        service_provider_price = findViewById(R.id.service_provider_price);
 
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        setTitle("Service Providers");
+      /*  setTitle("Service Providers");
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +41,15 @@ public class TestServiceProviderListingItem extends AppCompatActivity {
                 TestServiceProviderListingItem.super.onBackPressed();
             }
         });
-
+*/
         service_provider_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Pair[] pairs = new Pair[2];
+                Pair[] pairs = new Pair[1];
 
                 pairs[0] = new Pair<View, String>(service_provider_image, "fullImage");
-                pairs[1] = new Pair<View, String>(service_provider_price, "sharedPrice");
+                //pairs[1] = new Pair<View, String>(service_provider_price, "sharedPrice");
 
                 Intent intent = new Intent(TestServiceProviderListingItem.this, ServiceProviderDetails.class);
                 ActivityOptions activityOptions = null;

@@ -10,15 +10,15 @@
         style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="#FFF"
         app:layout_collapseMode="pin"
         app:title=""
-        android:background="#FFF"
         app:titleMarginStart="0dp"
         app:titleTextColor="#000" />
 
-    <ListView
-        android:id="@+id/service_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/service_rcy"
         android:layout_width="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize" />
 </RelativeLayout>
