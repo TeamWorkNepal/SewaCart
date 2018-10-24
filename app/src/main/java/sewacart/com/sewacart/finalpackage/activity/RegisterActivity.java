@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        toolbarMainActivity = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbarMainActivity = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbarMainActivity);
         setTitle("");
     }
@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (username.length() != 0 && email.length() != 0 && password.length() != 0 && passwordAgain.length() != 0) {
             if (username.length() > 3) {
                 if (password.equals(passwordAgain)) {
+
                     final SweetAlertDialog pDialog = new SweetAlertDialog(RegisterActivity.this, SweetAlertDialog.PROGRESS_TYPE);
                     pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                     pDialog.setTitleText("Loading");

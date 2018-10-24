@@ -31,7 +31,7 @@ public class ProviderDashboard extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle("Dashboard");
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

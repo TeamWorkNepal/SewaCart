@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
         setTitle("");
 

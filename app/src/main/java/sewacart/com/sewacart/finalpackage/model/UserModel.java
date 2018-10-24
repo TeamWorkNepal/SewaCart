@@ -96,7 +96,9 @@ public class UserModel {
         @SerializedName("user_photo")
         @Expose
         private String userPhoto;
-
+        @SerializedName("zip")
+        @Expose
+        private String zip;
         public String getId() {
             return id;
         }
@@ -201,7 +203,15 @@ public class UserModel {
             this.userPhoto = userPhoto;
         }
 
-        public UserDetails(String id, String name, String email, String role, String phone, String mobile, String state, String city, String street, String extraAddress, String description, String userPhoto) {
+        public String getZip() {
+            return zip;
+        }
+
+        public void setZip(String zip) {
+            this.zip = zip;
+        }
+
+        public UserDetails(String id, String name, String email, String role, String phone, String mobile, String state, String city, String street, String extraAddress, String description, String userPhoto, String zip) {
             this.id = id;
             this.name = name;
             this.email = email;
@@ -214,8 +224,8 @@ public class UserModel {
             this.extraAddress = extraAddress;
             this.description = description;
             this.userPhoto = userPhoto;
+            this.zip = zip;
         }
-
         public UserDetails() {
         }
     }

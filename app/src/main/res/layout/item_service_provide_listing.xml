@@ -55,7 +55,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/provider_image"
-                    android:transitionName="shared"
+                    android:transitionName="fullImage"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="1dp" />
 

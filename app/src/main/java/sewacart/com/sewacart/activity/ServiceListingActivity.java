@@ -23,7 +23,7 @@ public class ServiceListingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_service_listing);
         listView = findViewById(R.id.service_list);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         setTitle("Services");
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);

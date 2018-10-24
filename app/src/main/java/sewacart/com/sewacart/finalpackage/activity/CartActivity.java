@@ -34,10 +34,10 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         ButterKnife.bind(this);
 
-        table = (TableLayout) findViewById(R.id.table);
+        table = findViewById(R.id.table);
         setTitle("Cart List");
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;

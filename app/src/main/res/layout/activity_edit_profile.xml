@@ -51,13 +51,14 @@
                     app:layout_collapseMode="parallax" />
 
                 <TextView
+                    android:id="@+id/title_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="Gaurav Man Shrestha"
+                    android:text=""
                     android:textColor="#000"
                     android:textSize="20sp"
-                    android:layout_marginBottom="5dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -67,11 +68,11 @@
                     android:gravity="center"
                     android:text="Interior and Renovation"
                     android:textSize="13sp"
-                    android:visibility="gone"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btn_login"
+                    android:id="@+id/btn_update_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
@@ -79,7 +80,7 @@
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="12dp"
-                    android:text="Change Profile"
+                    android:text="Change Image"
                     android:textColor="#FFF"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -145,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
-                    android:text="Phone :"
+                    android:text="Mobile :"
                     android:textColor="#000"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -215,6 +216,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
+                    android:text="City :"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/price_tag_border"
+                    android:hint=""
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:text="Street :"
                     android:textColor="#000"
                     android:textSize="13sp"
@@ -229,8 +248,24 @@
                     android:hint=""
                     android:padding="10dp" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Zip:"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
 
+                <EditText
+                    android:id="@+id/zip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/price_tag_border"
+                    android:hint=""
+                    android:padding="10dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -274,13 +309,14 @@
                 <EditText
                     android:id="@+id/about_me"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/price_tag_border"
                     android:hint=""
+                    android:paddingLeft="16dp"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:maxLines="4"
-                    android:padding="10dp" />
-
+                    android:minHeight="150dp"
+                    android:gravity="start"
+                    android:paddingStart="16dp" />
 
             </LinearLayout>
 

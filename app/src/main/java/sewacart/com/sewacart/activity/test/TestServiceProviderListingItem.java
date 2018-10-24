@@ -15,6 +15,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import sewacart.com.sewacart.R;
 
 public class TestServiceProviderListingItem extends AppCompatActivity {
+
     Button service_provider_details;
     private Toolbar toolbar;
     CircleImageView service_provider_image;
@@ -31,7 +32,7 @@ public class TestServiceProviderListingItem extends AppCompatActivity {
         service_provider_name = findViewById(R.id.service_provider_name);
         service_provider_price = findViewById(R.id.service_provider_price);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         setTitle("Service Providers");
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);
@@ -48,7 +49,7 @@ public class TestServiceProviderListingItem extends AppCompatActivity {
 
                 Pair[] pairs = new Pair[2];
 
-                pairs[0] = new Pair<View, String>(service_provider_image, "shared");
+                pairs[0] = new Pair<View, String>(service_provider_image, "fullImage");
                 pairs[1] = new Pair<View, String>(service_provider_price, "sharedPrice");
 
                 Intent intent = new Intent(TestServiceProviderListingItem.this, ServiceProviderDetails.class);

@@ -1,5 +1,6 @@
 package sewacart.com.sewacart.finalpackage.activity;
 
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +64,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profileStreet;
     @BindView(R.id.profile_description)
     TextView profileDescription;
+    @BindView(R.id.profile_zip)
+    TextView profileZip;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,16 +73,20 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = findViewById(R.id.toolbar2);
         editIconImage = toolbar.findViewById(R.id.editIconImage);
 
-
+        loadProfile();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+
+    }
+
+    private void loadProfile() {
         mainWrapper.setVisibility(View.GONE);
 
         final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
@@ -96,7 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 pDialog.dismiss();
                 if (response.body().getValue() == 1) {
-
+                    final UserModel.UserDetails userDetails = response.body().getUserDetails();
                     mainWrapper.setVisibility(View.VISIBLE);
 
                     setSupportActionBar(toolbar);
@@ -107,14 +117,20 @@ public class ProfileActivity extends AppCompatActivity {
                             ProfileActivity.super.onBackPressed();
                         }
                     });
-                    editIconImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent(ProfileActivity.this, ProfileEditActivity.class));
-                        }
-                    });
+                    if (userDetails != null) {
+                        editIconImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("data", Parcels.wrap(userDetails));
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
 
-                    final UserModel.UserDetails userDetails = response.body().getUserDetails();
+                    }
+
 
                     toolbar.setTitle(userDetails.getName());
                     profileName.setText(userDetails.getName());
@@ -124,13 +140,33 @@ public class ProfileActivity extends AppCompatActivity {
                     profileMobile.setText(userDetails.getMobile());
                     profileState.setText(userDetails.getState());
                     profileCity.setText(userDetails.getCity());
+                    profileZip.setText(userDetails.getZip());
                     profileStreet.setText(userDetails.getStreet());
                     profileAddress.setText(userDetails.getExtraAddress());
                     profileDescription.setText(userDetails.getDescription());
 
+                    profileImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Pair[] pairs = new Pair[1];
+                            pairs[0] = new Pair<View, String>(profileImage, "fullImage");
 
+                            Intent chatIntent = new Intent(ProfileActivity.this, FullImageActivity.class);
+                            ActivityOptions activityOptions = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                activityOptions = ActivityOptions.makeSceneTransitionAnimation(ProfileActivity.this, pairs);
+                            }
+                            chatIntent.putExtra("imageUrl", userDetails.getUserPhoto());
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                startActivity(chatIntent, activityOptions.toBundle());
+                            } else {
+                                startActivity(chatIntent);
+                            }
+
+                        }
+                    });
                     if (!userDetails.getUserPhoto().isEmpty()) {
-                        Picasso.with(ProfileActivity.this).load(userDetails.getUserPhoto()).networkPolicy(NetworkPolicy.OFFLINE).into(profileImage, new com.squareup.picasso.Callback() {
+                        Picasso.with(ProfileActivity.this).load(userDetails.getUserPhoto()).placeholder(R.drawable.default_user).networkPolicy(NetworkPolicy.OFFLINE).into(profileImage, new com.squareup.picasso.Callback() {
                             @Override
                             public void onSuccess() {
 
@@ -138,7 +174,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                             @Override
                             public void onError() {
-                                Picasso.with(ProfileActivity.this).load(userDetails.getUserPhoto()).into(profileImage);
+                                Picasso.with(ProfileActivity.this).load(userDetails.getUserPhoto()).placeholder(R.drawable.default_user).into(profileImage);
                             }
 
 
@@ -170,7 +206,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
     }
 }

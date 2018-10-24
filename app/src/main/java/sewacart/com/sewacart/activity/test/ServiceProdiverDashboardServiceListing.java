@@ -29,7 +29,7 @@ public class ServiceProdiverDashboardServiceListing extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar = findViewById(R.id.toolbar2);
         toolbar.setTitle(getIntent().getStringExtra("key"));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);

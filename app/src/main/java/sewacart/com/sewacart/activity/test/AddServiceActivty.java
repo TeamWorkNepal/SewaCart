@@ -15,7 +15,7 @@ public class AddServiceActivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbar = findViewById(R.id.toolbar_main_activity);
 
         toolbar.setTitle("Gaurav Man Shrestha");
         setSupportActionBar(toolbar);

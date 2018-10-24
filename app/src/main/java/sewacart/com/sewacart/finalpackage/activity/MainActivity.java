@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         categoryFragment = new CategoryFragment();
         contactFragment = new ContactFragment();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_activity);
+        toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;

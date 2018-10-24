@@ -38,6 +38,7 @@ public class SharedPreferenceController {
         editor.putString("extra_address", data.getExtraAddress());
         editor.putString("description", data.getDescription());
         editor.putString("user_photo", data.getUserPhoto());
+        editor.putString("zip", data.getZip());
 
         editor.putBoolean("isLoggedIn", true);
 
@@ -61,9 +62,10 @@ public class SharedPreferenceController {
         String extra_address = prefs.getString("extra_address", "");
         String description = prefs.getString("description", "");
         String user_photo = prefs.getString("user_photo", "");
+        String zip = prefs.getString("zip", "");
 
 
 
-        return new UserModel.UserDetails(id, name, email, role, phone,mobile,state,city,street,extra_address,description,user_photo);
+        return new UserModel.UserDetails(id, name, email, role, phone,mobile,state,city,street,extra_address,description,user_photo,zip);
     }
 }

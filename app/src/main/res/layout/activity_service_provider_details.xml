@@ -37,7 +37,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="10dp"
                     android:src="@drawable/provider_image"
-                    android:transitionName="shared"
+                    android:transitionName="fullImage"
                     app:civ_border_color="#000"
                     app:civ_border_width="1dp"
                     app:layout_collapseMode="parallax" />
