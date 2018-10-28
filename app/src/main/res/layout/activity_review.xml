@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFF"
+            app:layout_collapseMode="pin"
+            app:title="Add Review"
+            app:titleMarginStart="0dp"
+            app:titleTextColor="#000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Title :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/review_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Enter title"
+                android:padding="10dp"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Designation :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/review_designation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Enter Designation"
+                android:padding="10dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Service:"
+                android:visibility="gone"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/review_service"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:hint="Enter provider's Service"
+                android:padding="10dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Rating :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:id="@+id/review_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/rating_lists"
+                android:hint="Rating"
+                android:padding="10dp"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Review :"
+                android:textColor="#000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/review_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_tag_border"
+                android:gravity="start"
+                android:hint="Enter review "
+                android:minHeight="100dp"
+                android:padding="10dp"
+                android:textSize="13sp" />
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/review_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                app:mrl_rippleBackground="#FFFFFF"
+                app:mrl_rippleOverlay="true"
+                app:mrl_rippleRoundedCorners="33dp">
+
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_rect"
+                    android:text="Review"
+                    android:textColor="#FFF" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

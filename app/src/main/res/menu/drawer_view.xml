@@ -10,6 +10,10 @@
             android:icon="@drawable/icon_person"
             android:title="Profile" />
         <item
+            android:id="@+id/myservices"
+            android:icon="@drawable/icon_my_services"
+            android:title="My Services" />
+        <item
             android:id="@+id/listing"
             android:icon="@drawable/icon_listing"
             android:title="Add Listing" />

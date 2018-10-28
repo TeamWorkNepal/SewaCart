@@ -31,6 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
 import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
@@ -79,12 +80,6 @@ public class ProfileActivity extends AppCompatActivity {
         loadProfile();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-    }
 
     private void loadProfile() {
         mainWrapper.setVisibility(View.GONE);
@@ -97,9 +92,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
         Map<String, String> params = new HashMap<String, String>();
-        //  params.put("user_id", SharedPreferenceController.getUserDetails(ProfileActivity.this).getId());
+         params.put("user_id", SharedPreferenceController.getUserDetails(ProfileActivity.this).getId());
         //TODO: make it dynamic
-        params.put("user_id", "1");
+       // params.put("user_id", "1");
         Call<UserModel> call = userInterface.getUserDetailsById(params);
         call.enqueue(new Callback<UserModel>() {
             @Override
@@ -114,7 +109,8 @@ public class ProfileActivity extends AppCompatActivity {
                     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ProfileActivity.super.onBackPressed();
+                            startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+
                         }
                     });
                     if (userDetails != null) {

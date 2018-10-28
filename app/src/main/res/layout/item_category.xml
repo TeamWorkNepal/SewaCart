@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="2dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/service_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="#FAFAFA"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/servicec_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="Plubmer" />
+
+        <TextView
+            android:id="@+id/service_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:text="24 Providers"
+            android:textSize="12sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

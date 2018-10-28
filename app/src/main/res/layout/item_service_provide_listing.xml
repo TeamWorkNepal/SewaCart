@@ -179,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/below"
                 android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:weightSum="3">
 
 
@@ -267,11 +268,11 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/wrapper_info"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/border_color" />
 
 
             <LinearLayout
+                android:id="@+id/below_wrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/below_down"
@@ -327,8 +328,41 @@
                     android:paddingStart="16dp"
                     android:text="Book Now"
                     android:textColor="#FFF" />
+
+
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/below_wrapper_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/below_wrapper"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+
+
+                <Button
+                    android:id="@+id/edit_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rct_sewacart"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingEnd="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingStart="16dp"
+                    android:text="Edit Details"
+                    android:textColor="#FFF" />
+
+
+            </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

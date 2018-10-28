@@ -1,10 +1,12 @@
 package sewacart.com.sewacart.finalpackage.model;
 
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ProviderModel {
 
     @SerializedName("id")
@@ -24,7 +26,7 @@ public class ProviderModel {
     private Integer organization;
     @SerializedName("user_id")
     @Expose
-    private Object userId;
+    private int userId;
     @SerializedName("service_provider")
     @Expose
     private Integer serviceProvider;
@@ -108,11 +110,11 @@ public class ProviderModel {
         this.organization = organization;
     }
 
-    public Object getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Object userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

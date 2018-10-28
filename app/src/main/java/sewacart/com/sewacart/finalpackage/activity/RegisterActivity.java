@@ -43,6 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
     TextView linkSignin;
     @BindView(R.id.input_username)
     EditText inputUsername;
+    @BindView(R.id.become_provider)
+    MaterialRippleLayout becomeProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         String passwordAgain = inputPasswordAgain.getText().toString();
 
         if (username.length() != 0 && email.length() != 0 && password.length() != 0 && passwordAgain.length() != 0) {
-            if (username.length() > 3) {
+            if (username.length() > 2) {
                 if (password.equals(passwordAgain)) {
 
                     final SweetAlertDialog pDialog = new SweetAlertDialog(RegisterActivity.this, SweetAlertDialog.PROGRESS_TYPE);
@@ -130,5 +132,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onBackPressed();
         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
+    }
+
+    @OnClick(R.id.become_provider)
+    public void onViewClicked() {
+        startActivity(new Intent(RegisterActivity.this, RegisterServiceProviderActivity.class));
     }
 }

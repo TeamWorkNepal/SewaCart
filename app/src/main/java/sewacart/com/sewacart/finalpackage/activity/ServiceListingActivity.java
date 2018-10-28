@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.activity;
+package sewacart.com.sewacart.finalpackage.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,25 +25,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.adapter.ServiceProviderAdapter;
-import sewacart.com.sewacart.finalpackage.activity.MainActivity;
-import sewacart.com.sewacart.finalpackage.activity.ProfileActivity;
+import sewacart.com.sewacart.adapter.ServiceProviderListingAdapter;
+import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
 import sewacart.com.sewacart.finalpackage.controller.VerticalNewsPaddingController;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
-import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 public class ServiceListingActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-
     @BindView(R.id.service_rcy)
     RecyclerView serviceRcy;
     LinearLayoutManager mLayoutManager;
     List<ProviderModel> providerModels = new ArrayList<>();
-    ServiceProviderAdapter serviceProviderAdapter;
-
+    ServiceProviderListingAdapter serviceProviderAdapter;
+    String catId = "1";
+    boolean own = false;
+    @BindView(R.id.editIconImage)
+    ImageView editIconImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +53,11 @@ public class ServiceListingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        setTitle("Services");
+
+
+        catId = String.valueOf(getIntent().getExtras().getInt("category_id", 0));
+        own = getIntent().getExtras().getBoolean("own", false);
+
         toolbar.setNavigationIcon(R.drawable.arrow_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +66,15 @@ public class ServiceListingActivity extends AppCompatActivity {
             }
         });
 
-        serviceProviderAdapter = new ServiceProviderAdapter(ServiceListingActivity.this, providerModels);
+        if (own) {
+            setTitle("My Services");
+            serviceProviderAdapter = new ServiceProviderListingAdapter(ServiceListingActivity.this, providerModels, true);
+            editIconImage.setVisibility(View.GONE);
+        } else {
+            setTitle("Services");
+            serviceProviderAdapter = new ServiceProviderListingAdapter(ServiceListingActivity.this, providerModels, false);
+        }
+
         serviceRcy.addItemDecoration(new VerticalNewsPaddingController(0));
         mLayoutManager = new LinearLayoutManager(ServiceListingActivity.this);
         serviceRcy.setLayoutManager(mLayoutManager);
@@ -78,6 +91,13 @@ public class ServiceListingActivity extends AppCompatActivity {
 
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
         Map<String, String> params = new HashMap<String, String>();
+
+        if (own) {
+            params.put("user_id", SharedPreferenceController.getUserDetails(ServiceListingActivity.this).getId());
+        } else {
+            params.put("cat_id", catId);
+        }
+
         Call<List<ProviderModel>> call = userInterface.getProviders(params);
         call.enqueue(new Callback<List<ProviderModel>>() {
             @Override

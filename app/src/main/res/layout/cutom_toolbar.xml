@@ -17,7 +17,7 @@
         android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/icon_ham"
-        android:visibility="gone" />
+       />
 
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/logo" />
+        android:src="@drawable/top" />
 
 
     <ImageView

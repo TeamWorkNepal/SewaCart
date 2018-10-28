@@ -112,9 +112,10 @@ public class ServiceProdiverDashboardServiceListing extends AppCompatActivity {
         table.addView(topTableRow);
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         table.removeAllViews();
     }
 }

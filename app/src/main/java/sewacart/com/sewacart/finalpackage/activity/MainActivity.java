@@ -23,9 +23,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.activity.test.AddServiceActivty;
 import sewacart.com.sewacart.activity.test.ProviderDashboard;
-import sewacart.com.sewacart.activity.test.TestServiceProviderListingItem;
 import sewacart.com.sewacart.fragments.CategoryFragment;
 import sewacart.com.sewacart.fragments.ContactFragment;
 import sewacart.com.sewacart.fragments.HomeFragment;
@@ -62,14 +60,22 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
 
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.icon_ham);
+        //  actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setHomeAsUpIndicator(R.drawable.icon_ham);
 
         setTitle("");
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View custumBarLayout = layoutInflater.inflate(R.layout.cutom_toolbar, null);
         actionBar.setCustomView(custumBarLayout);
+        hambuger = custumBarLayout.findViewById(R.id.hambuger);
+        hambuger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
         /* cartIcon = custumBarLayout.findViewById(R.id.my_cart);
          cartIcon.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -104,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.listing:
                                 startActivity(new Intent(MainActivity.this, AddServiceActivty.class));
                                 return true;
+                            case R.id.myservices:
+
+                                Intent intent = new Intent(MainActivity.this, ServiceListingActivity.class);
+                                intent.putExtra("own", true);
+                                startActivity(intent);
+                                return true;
+
                             case R.id.profile:
                                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                                 return true;

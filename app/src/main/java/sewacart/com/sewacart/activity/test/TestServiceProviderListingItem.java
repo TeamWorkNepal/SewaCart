@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.finalpackage.activity.ServiceProviderDetailsActivity;
 
 public class TestServiceProviderListingItem extends AppCompatActivity {
 
@@ -51,7 +52,7 @@ public class TestServiceProviderListingItem extends AppCompatActivity {
                 pairs[0] = new Pair<View, String>(service_provider_image, "fullImage");
                 //pairs[1] = new Pair<View, String>(service_provider_price, "sharedPrice");
 
-                Intent intent = new Intent(TestServiceProviderListingItem.this, ServiceProviderDetails.class);
+                Intent intent = new Intent(TestServiceProviderListingItem.this, ServiceProviderDetailsActivity.class);
                 ActivityOptions activityOptions = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     activityOptions = ActivityOptions.makeSceneTransitionAnimation(TestServiceProviderListingItem.this, pairs);

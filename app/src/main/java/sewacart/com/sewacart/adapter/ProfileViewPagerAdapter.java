@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import sewacart.com.sewacart.fragments.CategoryFragment;
+import sewacart.com.sewacart.fragments.BriefFragment;
+import sewacart.com.sewacart.fragments.InfoFragment;
 import sewacart.com.sewacart.fragments.ReviewFragment;
 
 
@@ -14,19 +15,24 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     Context context;
 
 
+
     public ProfileViewPagerAdapter(FragmentManager fm, int size, Context context) {
         super(fm);
         this.size = size;
         this.context = context;
 
+
     }
 
     @Override
     public Fragment getItem(int position) {
-        if(position==2){
-            return new ReviewFragment();
+
+        if(position==0){
+            return new BriefFragment();
+        }else if(position==1){
+            return new InfoFragment();
         }else{
-            return new CategoryFragment();
+            return new ReviewFragment();
         }
 
     }

@@ -159,13 +159,35 @@
                     android:textColor="#1592b5"
                     android:textSize="13sp" />
 
-                <TextView
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:id="@+id/become_provider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:mrl_rippleBackground="#FFFFFF"
+                    app:mrl_rippleOverlay="true"
+                    app:mrl_rippleRoundedCorners="33dp">
 
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="40dp"
+                        android:paddingEnd="40dp"
+                        android:textSize="11sp"
+                        android:background="@drawable/btn_rect"
+                        android:text="Become Service Provider"
+                        android:textColor="#FFF" />
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+                <TextView
+                    android:id="@+id/btn_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
                     android:gravity="center"
                     android:paddingBottom="10dp"
+                    android:layout_marginTop="24dp"
                     android:text="By creating an account you will be able to order faster, be up to date on an order's status, keep track of the order you have previously made."
                     android:textAlignment="center"
                     android:textSize="13sp" />
