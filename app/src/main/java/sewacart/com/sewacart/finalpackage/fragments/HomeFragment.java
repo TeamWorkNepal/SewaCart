@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.fragments;
+package sewacart.com.sewacart.finalpackage.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -27,8 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.adapter.ServiceAdapter;
-import sewacart.com.sewacart.adapter.ServiceCategoryAdapter;
+import sewacart.com.sewacart.finalpackage.adapter.ServiceAdapter;
+import sewacart.com.sewacart.finalpackage.adapter.ServiceCategoryAdapter;
 import sewacart.com.sewacart.finalpackage.controller.NetworkDetectController;
 import sewacart.com.sewacart.finalpackage.model.HomeModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;

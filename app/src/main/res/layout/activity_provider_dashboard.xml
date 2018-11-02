@@ -15,242 +15,482 @@
         app:titleMarginStart="0dp"
         app:titleTextColor="#000" />
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar2"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/wrapper_new_job"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                app:cardBackgroundColor="#363841"
-                app:cardCornerRadius="10dp">
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                    android:layout_height="match_parent">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/wrapper_ready_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#363841"
+                    app:cardCornerRadius="10dp">
 
-                    <TextView
-                        android:id="@+id/new_job_title"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/new_job_count"
-                        android:text="New Job"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/new_job_count"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/ready_job_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/ready_job_count"
+                            android:text="Ready Job"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/ready_job_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_new_job" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/wrapper_pending_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#26a69a"
+                    app:cardCornerRadius="10dp">
+
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="5dp"
-                        android:text="125"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="30sp" />
+                        android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/icon_new_job" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/pending_job_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/pending_job_count"
+                            android:text="Pending Job"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/pending_job_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/wrapper_pending_job"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                app:cardBackgroundColor="#26a69a"
-                app:cardCornerRadius="10dp">
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_pending" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/pending_job_title"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/wapper_completed_job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#5c6bc0"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pending Job"
-                        android:textColor="#FFF"
-                        android:textSize="17sp"
-                        android:textAlignment="center"
-                        android:layout_above="@id/pending_job_count"
-                        android:textStyle="bold" />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/pending_job_count"
+                        <TextView
+                            android:id="@+id/completed_job_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/completed_job_count"
+                            android:text="Complete Job"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/completed_job_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_job_completed" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/rejected_job_wrapper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#64bc36"
+                    app:cardCornerRadius="10dp">
+
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent">
 
-                        android:layout_marginTop="5dp"
-                        android:text="25"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="30sp" />
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/icon_pending" />
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/rejected_job_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/rejected_job_count"
+                            android:layout_centerInParent="true"
+                            android:text="Rejected Job"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/rejected_job_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_rejected" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/wapper_completed_job"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="16dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                app:cardBackgroundColor="#5c6bc0"
-                app:cardCornerRadius="10dp">
+                android:orientation="horizontal"
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:weightSum="2">
 
-                    <TextView
-                        android:id="@+id/completed_job_title"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/pending_Service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#64bc36"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Complete Job"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="17sp"
-                        android:layout_above="@+id/completed_job_count"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/completed_job_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="13"
-                        android:layout_centerInParent="true"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="30sp" />
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/icon_job_completed" />
-                </RelativeLayout>
+                        android:layout_height="match_parent">
 
-            </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/service_pending"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/service_pending_count"
+                            android:text="Pending Service"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/wrapper_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="8dp"
+                        <TextView
+                            android:id="@+id/service_pending_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_pending" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/service_published"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#5c6bc0"
+                    app:cardCornerRadius="10dp">
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/service_published_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/service_published_title_count"
+                            android:text="Published Service"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/service_published_title_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_new_job" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                app:cardBackgroundColor="#64bc36"
-                app:cardCornerRadius="10dp">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
+                <android.support.v7.widget.CardView
+                    android:id="@+id/service_total_listing_wrapper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#363841"
+                    app:cardCornerRadius="10dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/balance"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Remaining Balance"
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:textSize="17sp"
-                        android:layout_above="@+id/balance_count"
-                        android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/balance_count"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/service_total_listing"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/service_total_listing_count"
+                            android:text="Total Service"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/service_total_listing_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_total_service" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/balance_wrapper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    app:cardBackgroundColor="#26a69a"
+                    app:cardCornerRadius="10dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
 
-                        android:layout_marginTop="5dp"
-                        android:text="Rs. 2333 "
-                        android:textAlignment="center"
-                        android:textColor="#FFF"
-                        android:layout_centerInParent="true"
-                        android:textSize="30sp" />
+                        android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/icon_balance" />
+                        <TextView
+                            android:id="@+id/balance_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@id/balance_title_count"
+                            android:text="Balance"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/balance_title_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="5dp"
+                            android:text="Rs. 1000"
+                            android:textAlignment="center"
+                            android:textColor="#FFF"
+                            android:textSize="30sp" />
 
-            </android.support.v7.widget.CardView>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/icon_balance" />
+                    </RelativeLayout>
 
+                </android.support.v7.widget.CardView>
 
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

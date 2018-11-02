@@ -68,4 +68,10 @@ public class SharedPreferenceController {
 
         return new UserModel.UserDetails(id, name, email, role, phone,mobile,state,city,street,extra_address,description,user_photo,zip);
     }
+    public  static void clearSharedPrefernce(Context context){
+        prefs = context.getSharedPreferences("userdetails", Context.MODE_PRIVATE);
+        prefs.edit().clear().apply();
+
+
+    }
 }

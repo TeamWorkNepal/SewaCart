@@ -1,16 +1,16 @@
-package sewacart.com.sewacart.fragments;
+package sewacart.com.sewacart.finalpackage.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,8 +25,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.adapter.ReviewAdapter;
 import sewacart.com.sewacart.finalpackage.activity.ServiceProviderDetailsActivity;
+import sewacart.com.sewacart.finalpackage.adapter.ReviewAdapter;
 import sewacart.com.sewacart.finalpackage.controller.VerticalNewsPaddingController;
 import sewacart.com.sewacart.finalpackage.model.ReviewModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
@@ -42,7 +42,7 @@ public class ReviewFragment extends Fragment {
     @BindView(R.id.loading_msg)
     TextView loadingMsg;
     @BindView(R.id.nested)
-    ScrollView nested;
+    NestedScrollView nested;
 
     @Override
     public void onAttach(Context context) {
@@ -60,7 +60,7 @@ public class ReviewFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(context);
         reviewRcy.setLayoutManager(mLayoutManager);
         reviewAdapter = new ReviewAdapter(reviewModels, context);
-
+    reviewRcy.setNestedScrollingEnabled(false);
         return view;
     }
 

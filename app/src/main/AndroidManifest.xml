@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="sewacart.com.sewacart">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,15 +21,16 @@
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".finalpackage.activity.ServiceListingActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -39,50 +39,52 @@
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.test.ProviderDashboard"
+            android:name=".finalpackage.activity.ProviderDashboard"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.test.TestServiceProviderListingItem"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".finalpackage.activity.ServiceProviderDetailsActivity"
-
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".finalpackage.activity.CartActivity"
+            android:name=".finalpackage.activity.ViewCartActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".activity.test.ServiceProdiverDashboardServiceListing"
+            android:name=".finalpackage.activity.OrdersActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -91,6 +93,7 @@
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -99,6 +102,7 @@
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -107,35 +111,36 @@
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.SignupActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".finalpackage.activity.RegisterActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".finalpackage.activity.FullImageActivity" />
-
+        <activity android:name=".finalpackage.activity.CheckoutActivity" />
         <activity
             android:name=".finalpackage.activity.ReviewActivity"
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -144,9 +149,21 @@
             android:theme="@style/customTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".finalpackage.activity.SubCategoryListingActivity"
+            android:theme="@style/customTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".finalpackage.activity.PurchaseActivity"></activity>
+        <activity android:name=".finalpackage.activity.CustomerDashboard"></activity>
     </application>
 
 </manifest>

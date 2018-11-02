@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.adapter.ServiceProviderListingAdapter;
+import sewacart.com.sewacart.finalpackage.adapter.ServiceProviderListingAdapter;
 import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
 import sewacart.com.sewacart.finalpackage.controller.VerticalNewsPaddingController;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
@@ -33,6 +34,7 @@ import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 public class ServiceListingActivity extends AppCompatActivity {
+
 
     Toolbar toolbar;
     @BindView(R.id.service_rcy)
@@ -44,6 +46,8 @@ public class ServiceListingActivity extends AppCompatActivity {
     boolean own = false;
     @BindView(R.id.editIconImage)
     ImageView editIconImage;
+    @BindView(R.id.default_msg)
+    TextView defaultMsg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,6 +109,11 @@ public class ServiceListingActivity extends AppCompatActivity {
                 pDialog.dismiss();
                 providerModels.addAll(response.body());
                 serviceRcy.setAdapter(serviceProviderAdapter);
+                if(response.body().size()==0){
+                    defaultMsg.setVisibility(View.VISIBLE);
+                }else{
+                    defaultMsg.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -129,4 +138,9 @@ public class ServiceListingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        defaultMsg.setVisibility(View.GONE);
+    }
 }

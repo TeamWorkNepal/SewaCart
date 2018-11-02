@@ -1,7 +1,8 @@
-package sewacart.com.sewacart.adapter;
+package sewacart.com.sewacart.finalpackage.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -24,10 +26,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.finalpackage.activity.ViewCartActivity;
 import sewacart.com.sewacart.finalpackage.activity.ServiceProviderDetailsActivity;
+import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
+import sewacart.com.sewacart.finalpackage.model.AddToCartModel;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
+import sewacart.com.sewacart.finalpackage.rest.ApiClient;
+import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceProviderListingAdapter.ViewHolder> {
     Context context;
@@ -90,6 +101,54 @@ public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceP
                     context.startActivity(intent);
                 }
             });
+
+            holder.addToCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                    pDialog.setTitleText("Loading");
+                    pDialog.setCancelable(false);
+                    pDialog.show();
+
+                    final UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
+                    Call<AddToCartModel> call = userInterface.addToCart("add_to_cart", providerModel.getId() + "", SharedPreferenceController.getUserDetails(context).getId());
+                    call.enqueue(new Callback<AddToCartModel>() {
+                        @Override
+                        public void onResponse(@NonNull Call<AddToCartModel> call, @NonNull Response<AddToCartModel> response) {
+                            pDialog.dismiss();
+                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Successful !")
+                                    .setContentText("Click ok to proceed ")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                            sweetAlertDialog.dismiss();
+                                            Intent intent = new Intent(context, ViewCartActivity.class);
+                                            context.startActivity(intent);
+                                        }
+                                    })
+                                    .show();
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<AddToCartModel> call, @NonNull Throwable t) {
+                            pDialog.dismiss();
+                            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+
+            holder.bookNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+
+
         } else {
             holder.belowWrapper.setVisibility(View.GONE);
             holder.belowWrapperDown.setVisibility(View.VISIBLE);
@@ -145,6 +204,12 @@ public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceP
 
         @BindView(R.id.edit_service)
         Button editService;
+
+        @BindView(R.id.add_to_cart)
+        Button addToCart;
+
+        @BindView(R.id.book_now)
+        Button bookNow;
 
         ViewHolder(View view) {
             super(view);

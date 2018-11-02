@@ -11,12 +11,19 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
+import sewacart.com.sewacart.finalpackage.activity.CustomerDashboard;
 import sewacart.com.sewacart.finalpackage.model.AddReviewModel;
+import sewacart.com.sewacart.finalpackage.model.AddToCartModel;
+import sewacart.com.sewacart.finalpackage.model.CategoryModel;
+import sewacart.com.sewacart.finalpackage.model.CustomerDashboardModel;
+import sewacart.com.sewacart.finalpackage.model.DashboardModel;
 import sewacart.com.sewacart.finalpackage.model.HomeModel;
+import sewacart.com.sewacart.finalpackage.model.OrderModel;
 import sewacart.com.sewacart.finalpackage.model.ParentModel;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
 import sewacart.com.sewacart.finalpackage.model.ReviewModel;
 import sewacart.com.sewacart.finalpackage.model.UserModel;
+import sewacart.com.sewacart.finalpackage.model.ViewCartModel;
 
 public interface UserInterface {
 
@@ -48,6 +55,22 @@ public interface UserInterface {
     @POST("wp-admin/admin-ajax.php")
     Call<Object> addService(@Body RequestBody file);
 
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<AddToCartModel> addToCart(@Field("action") String action, @Field("product_id") String product_id, @Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<AddToCartModel> removeFromCart(@Field("action") String action, @Field("product_id") String product_id, @Field("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<AddToCartModel> orderNow(@Field("action") String action, @Field("user_id") String user_id, @Field("deliver_address") String deliver_address, @Field("deliver_full_name") String deliver_full_name, @Field("deliver_contact") String deliver_contact, @Field("deliver_email") String deliver_email, @Field("deliver_information") String deliver_information);
+
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<AddToCartModel> purchasePoint(@Field("action") String action, @Field("user_id") String user_id, @Field("purchase_point") String purchase_point, @Field("payment_option") String payment_option);
+
 
     // GET METHODS
     @GET("wp-json/api/services")
@@ -73,4 +96,21 @@ public interface UserInterface {
 
     @GET("wp-json/api/getChildCategory")
     Call<List<ParentModel.Category>> getChildCategory(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/serviceProviderDashboard")
+    Call<DashboardModel> getDashboard(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/customerDashboard")
+    Call<List<CustomerDashboardModel>> getCustomerDashboard(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/viewcart")
+    Call<ViewCartModel> getViewCart(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/userOrdersStatus")
+    Call<List<OrderModel>> getOrderlist(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/parentChildCategories")
+    Call<List<CategoryModel>> getCategories(@QueryMap Map<String, String> params);
+
+
 }

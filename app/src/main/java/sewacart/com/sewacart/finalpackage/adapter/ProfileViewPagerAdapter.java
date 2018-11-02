@@ -1,13 +1,13 @@
-package sewacart.com.sewacart.adapter;
+package sewacart.com.sewacart.finalpackage.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import sewacart.com.sewacart.fragments.BriefFragment;
-import sewacart.com.sewacart.fragments.InfoFragment;
-import sewacart.com.sewacart.fragments.ReviewFragment;
+import sewacart.com.sewacart.finalpackage.fragments.BriefFragment;
+import sewacart.com.sewacart.finalpackage.fragments.InfoFragment;
+import sewacart.com.sewacart.finalpackage.fragments.ReviewFragment;
 
 
 public class ProfileViewPagerAdapter extends FragmentPagerAdapter {

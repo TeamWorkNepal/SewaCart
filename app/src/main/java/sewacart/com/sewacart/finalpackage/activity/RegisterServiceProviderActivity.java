@@ -132,7 +132,7 @@ public class RegisterServiceProviderActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(RegisterServiceProviderActivity.this, RegisterActivity.class));
+      //  startActivity(new Intent(RegisterServiceProviderActivity.this, RegisterActivity.class));
 
     }
 }

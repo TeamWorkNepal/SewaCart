@@ -2,7 +2,9 @@ package sewacart.com.sewacart.finalpackage.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.bottomnavigation.LabelVisibilityMode;
 import android.support.design.widget.BottomNavigationView;
@@ -16,17 +18,26 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.activity.test.ProviderDashboard;
-import sewacart.com.sewacart.fragments.CategoryFragment;
-import sewacart.com.sewacart.fragments.ContactFragment;
-import sewacart.com.sewacart.fragments.HomeFragment;
+import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
+import sewacart.com.sewacart.finalpackage.fragments.CategoryFragment;
+import sewacart.com.sewacart.finalpackage.fragments.ContactFragment;
+import sewacart.com.sewacart.finalpackage.fragments.HomeFragment;
+import sewacart.com.sewacart.finalpackage.model.UserModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,17 +54,79 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    TextView header_name, header_title;
+    CircleImageView circleImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //TODO: Make sure about adminster part and remove all the action part
+        Menu nav_Menu = navView.getMenu();
+
+        View header = navView.getHeaderView(0);
+        header_name = (TextView) header.findViewById(R.id.header_name);
+        header_title = (TextView) header.findViewById(R.id.header_title);
+        circleImageView = (CircleImageView) header.findViewById(R.id.header_profile_image);
+
+        if (SharedPreferenceController.getLoginLog(MainActivity.this)) {
+
+            nav_Menu.findItem(R.id.login).setVisible(false);
+            final UserModel.UserDetails userDetails = SharedPreferenceController.getUserDetails(MainActivity.this);
+            header_name.setText(userDetails.getName());
+            header_title.setText("- " + userDetails.getRole());
+
+
+            if (!userDetails.getUserPhoto().isEmpty()) {
+                Picasso.with(MainActivity.this).load(userDetails.getUserPhoto()).placeholder(R.drawable.default_user).networkPolicy(NetworkPolicy.OFFLINE).into(circleImageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(MainActivity.this).load(userDetails.getUserPhoto()).placeholder(R.drawable.default_user).into(circleImageView);
+                    }
+
+
+                });
+            }
+
+
+            if (userDetails.getRole().equalsIgnoreCase("administrator")) {
+
+               // nav_Menu.findItem(R.id.myservices).setVisible(false);
+               // nav_Menu.findItem(R.id.purchase).setVisible(false);
+               // nav_Menu.findItem(R.id.listing).setVisible(false);
+              //  nav_Menu.findItem(R.id.dashboard).setVisible(false);
+               // nav_Menu.findItem(R.id.profile).setVisible(false);
+
+            } else if (userDetails.getRole().equalsIgnoreCase("customer")) {
+
+                nav_Menu.findItem(R.id.myservices).setVisible(false);
+                nav_Menu.findItem(R.id.purchase).setVisible(false);
+                nav_Menu.findItem(R.id.listing).setVisible(false);
+
+            } else if (userDetails.getRole().equalsIgnoreCase("editor")) {
+
+
+            }
+        } else {
+            nav_Menu.findItem(R.id.logout).setVisible(false);
+            nav_Menu.findItem(R.id.myservices).setVisible(false);
+            nav_Menu.findItem(R.id.purchase).setVisible(false);
+            nav_Menu.findItem(R.id.listing).setVisible(false);
+            nav_Menu.findItem(R.id.dashboard).setVisible(false);
+            nav_Menu.findItem(R.id.profile).setVisible(false);
+        }
 
 
         homeFragment = new HomeFragment();
         categoryFragment = new CategoryFragment();
         contactFragment = new ContactFragment();
+
 
         toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
@@ -76,13 +149,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* cartIcon = custumBarLayout.findViewById(R.id.my_cart);
-         cartIcon.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 startActivity(new Intent(MainActivity.this, TestServiceProviderListingItem.class));
-             }
-         });*/
+        cartIcon = custumBarLayout.findViewById(R.id.my_cart);
+        cartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                    startActivity(new Intent(MainActivity.this, ViewCartActivity.class));
+                } else {
+                    final SweetAlertDialog pDialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
+                    pDialog.setTitleText("Hm...");
+                    pDialog.setCancelText("Cancel");
+                    pDialog.setConfirmText("Log In");
+                    pDialog.setContentText("Looks like you are not logged in !");
+                    pDialog.show();
+                    pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            sweetAlertDialog.dismissWithAnimation();
+                        }
+                    });
+
+                }
+
+
+            }
+        });
+
+
        /* hambuger = custumBarLayout.findViewById(R.id.hambuger);
         //  cartIcon.setVisibility(View.VISIBLE);
         hambuger.setOnClickListener(new View.OnClickListener() {
@@ -99,29 +194,104 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
-
-
                         drawerLayout.closeDrawers();
+
+
                         switch (item.getItemId()) {
 
                             case R.id.dashboard:
-                                startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
-                                return true;
-                            case R.id.listing:
-                                startActivity(new Intent(MainActivity.this, AddServiceActivty.class));
-                                return true;
-                            case R.id.myservices:
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+                                    if (SharedPreferenceController.getUserDetails(MainActivity.this).getRole().equalsIgnoreCase("customer")) {
+                                        startActivity(new Intent(MainActivity.this, CustomerDashboard.class));
+                                        return true;
+                                    } else {
+                                        startActivity(new Intent(MainActivity.this, ProviderDashboard.class));
+                                        return true;
+                                    }
 
-                                Intent intent = new Intent(MainActivity.this, ServiceListingActivity.class);
-                                intent.putExtra("own", true);
-                                startActivity(intent);
-                                return true;
+                                }
+
+
+                            case R.id.listing:
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+                                    startActivity(new Intent(MainActivity.this, AddServiceActivty.class));
+                                    return true;
+                                }
+
+
+                            case R.id.myservices:
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+
+
+                                    Intent intent = new Intent(MainActivity.this, ServiceListingActivity.class);
+                                    intent.putExtra("own", true);
+                                    startActivity(intent);
+                                    return true;
+                                }
+
 
                             case R.id.profile:
-                                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+                                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                                    return true;
+                                }
+
+
+                            case R.id.purchase:
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+                                    startActivity(new Intent(MainActivity.this, PurchaseActivity.class));
+                                    return true;
+                                }
+
+
+                            case R.id.logout:
+                                if (!SharedPreferenceController.getLoginLog(MainActivity.this)) {
+                                    fallback();
+                                    return true;
+                                } else {
+                                    SharedPreferenceController.clearSharedPrefernce(MainActivity.this);
+                                    final SweetAlertDialog pDialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                                    pDialog.setTitleText("Loading");
+                                    pDialog.setContentText("Logging you out... please wait !");
+                                    pDialog.setCancelable(false);
+                                    pDialog.show();
+
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            pDialog.dismiss();
+                                            Toast.makeText(MainActivity.this, "Logged Out Successfully !", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                                            finish();
+
+                                        }
+                                    }, 2000);
+
+                                    return true;
+                                }
+                            case R.id.login:
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                                 return true;
+
                         }
                         item.setChecked(false);
+
 
                         return false;
 
@@ -168,10 +338,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -181,5 +347,22 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void fallback() {
+        final SweetAlertDialog pDialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
+        pDialog.setTitleText("Hm...");
+        pDialog.setCancelText("Cancel");
+        pDialog.setConfirmText("Log In");
+        pDialog.setContentText("Looks like you are not logged in !");
+        pDialog.show();
+        pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                sweetAlertDialog.dismissWithAnimation();
+            }
+        });
     }
 }

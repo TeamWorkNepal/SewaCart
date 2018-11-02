@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+      //  startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
     }
 

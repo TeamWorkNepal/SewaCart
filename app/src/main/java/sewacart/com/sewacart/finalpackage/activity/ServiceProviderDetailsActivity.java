@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
@@ -26,10 +28,17 @@ import org.parceler.Parcels;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.adapter.ProfileViewPagerAdapter;
+import sewacart.com.sewacart.finalpackage.adapter.ProfileViewPagerAdapter;
+import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
+import sewacart.com.sewacart.finalpackage.model.AddToCartModel;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
+import sewacart.com.sewacart.finalpackage.rest.ApiClient;
+import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 public class ServiceProviderDetailsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     @BindView(R.id.add_to_cart)
@@ -109,8 +118,8 @@ public class ServiceProviderDetailsActivity extends AppCompatActivity implements
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  = new Intent(ServiceProviderDetailsActivity.this, ReviewActivity.class);
-                intent.putExtra("service_id",providerModel.getId());
+                Intent intent = new Intent(ServiceProviderDetailsActivity.this, ReviewActivity.class);
+                intent.putExtra("service_id", providerModel.getId());
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("data", Parcels.wrap(providerModel));
                 intent.putExtras(bundle);
@@ -153,6 +162,7 @@ public class ServiceProviderDetailsActivity extends AppCompatActivity implements
 
         }
     }
+
     @Override
     public void onPageScrollStateChanged(int i) {
 
@@ -163,7 +173,39 @@ public class ServiceProviderDetailsActivity extends AppCompatActivity implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_to_cart:
-                startActivity(new Intent(ServiceProviderDetailsActivity.this, CartActivity.class));
+
+                final SweetAlertDialog pDialog = new SweetAlertDialog(ServiceProviderDetailsActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Loading");
+                pDialog.setCancelable(false);
+                pDialog.show();
+
+                final UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
+                Call<AddToCartModel> call = userInterface.addToCart("add_to_cart", providerModel.getId() + "", SharedPreferenceController.getUserDetails(ServiceProviderDetailsActivity.this).getId());
+                call.enqueue(new retrofit2.Callback<AddToCartModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<AddToCartModel> call, @NonNull Response<AddToCartModel> response) {
+                        pDialog.dismiss();
+                        new SweetAlertDialog(ServiceProviderDetailsActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Successful !")
+                                .setContentText("Click ok to proceed ")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.dismiss();
+                                        Intent intent = new Intent(ServiceProviderDetailsActivity.this, ViewCartActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .show();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<AddToCartModel> call, @NonNull Throwable t) {
+                        pDialog.dismiss();
+                        Toast.makeText(ServiceProviderDetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
 
         }

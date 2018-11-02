@@ -93,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
         Map<String, String> params = new HashMap<String, String>();
          params.put("user_id", SharedPreferenceController.getUserDetails(ProfileActivity.this).getId());
-        //TODO: make it dynamic
+
        // params.put("user_id", "1");
         Call<UserModel> call = userInterface.getUserDetailsById(params);
         call.enqueue(new Callback<UserModel>() {
@@ -186,7 +186,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                 pDialog.dismiss();
-
                 fallback();
 
             }

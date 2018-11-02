@@ -42,7 +42,6 @@ import retrofit2.Response;
 import sewacart.com.sewacart.R;
 import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
 import sewacart.com.sewacart.finalpackage.model.ParentModel;
-import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
@@ -80,11 +79,15 @@ public class AddServiceActivty extends AppCompatActivity {
     MaterialRippleLayout addserviceRpl;
 
     final ArrayList<CharSequence> selectedColours = new ArrayList<CharSequence>();
+    final ArrayList<Integer> selectedColoursId = new ArrayList<Integer>();
     boolean[] checkedColours;
 
     File showImage = null;
     final ArrayList<CharSequence> selectedColoursAddress = new ArrayList<CharSequence>();
+    final ArrayList<Integer> selectedColoursAddressId = new ArrayList<Integer>();
     boolean[] checkedColoursAddress;
+
+
     @BindView(R.id.upload_image)
     ImageView uploadImage;
 
@@ -240,10 +243,13 @@ public class AddServiceActivty extends AppCompatActivity {
 
 
                         final CharSequence[] colours = new CharSequence[response.body().size()];
+                        final Integer[] coloursId = new Integer[response.body().size()];
+
                         sub_cateogry.setText("");
 
                         for (int i = 0; i < response.body().size(); i++) {
                             colours[i] = response.body().get(i).getCatTitle();
+                            coloursId[i] = response.body().get(i).getCatId();
                         }
                         checkedColours = new boolean[colours.length];
 
@@ -257,11 +263,14 @@ public class AddServiceActivty extends AppCompatActivity {
                             @Override
 
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if (isChecked)
+                                if (isChecked) {
                                     selectedColours.add(colours[which]);
-
-                                else
+                                    selectedColoursId.add(coloursId[which]);
+                                } else {
                                     selectedColours.remove(colours[which]);
+                                    selectedColoursId.remove(coloursId[which]);
+                                }
+
 
                                 onChangeSelectedColours();
 
@@ -324,15 +333,18 @@ public class AddServiceActivty extends AppCompatActivity {
 
 
                         final CharSequence[] colours = new CharSequence[response.body().size()];
+                        final Integer[] coloursId = new Integer[response.body().size()];
                         subAddress.setText("");
 
                         for (int i = 0; i < response.body().size(); i++) {
                             colours[i] = response.body().get(i).getRegionTitle();
+                            coloursId[i] = response.body().get(i).getRegionId();
                         }
                         checkedColoursAddress = new boolean[colours.length];
 
                         int count = colours.length;
                         selectedColoursAddress.clear();
+
                         for (int i = 0; i < count; i++)
                             checkedColoursAddress[i] = selectedColoursAddress.contains(colours[i]);
 
@@ -341,11 +353,14 @@ public class AddServiceActivty extends AppCompatActivity {
                             @Override
 
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if (isChecked)
+                                if (isChecked) {
                                     selectedColoursAddress.add(colours[which]);
-
-                                else
+                                    selectedColoursAddressId.add(coloursId[which]);
+                                } else {
                                     selectedColoursAddress.remove(colours[which]);
+                                    selectedColoursAddressId.remove(coloursId[which]);
+                                }
+
 
                                 onChangeSelectedColoursAddress();
 
@@ -441,7 +456,7 @@ public class AddServiceActivty extends AppCompatActivity {
         String mMobile1 = mobile.getText().toString();
         String mMobile2 = mobileAlter.getText().toString();
         String mServiceCost = serviceCost.getText().toString();
-        String mCostInterval =costInterval.getSelectedItem().toString();
+        String mCostInterval = costInterval.getSelectedItem().toString();
         String mServiceHour = serviceHour.getText().toString();
         String mExp = exp.getText().toString();
 
@@ -452,11 +467,11 @@ public class AddServiceActivty extends AppCompatActivity {
         builder.addFormDataPart("action", "add_listing");
         builder.addFormDataPart("title", title);
         builder.addFormDataPart("content", content);
-        builder.addFormDataPart("author", author);
+        builder.addFormDataPart("author", SharedPreferenceController.getUserDetails(AddServiceActivty.this).getId()+"");
         builder.addFormDataPart("service-category[]", parentCategory);
 
         for (int i = 0; i < selectedColours.size(); i++) {
-            builder.addFormDataPart("sub_cat[]", selectedColours.get(i) + "");
+            builder.addFormDataPart("sub_cat[]", selectedColoursId.get(i) + "");
 
         }
 
@@ -464,13 +479,13 @@ public class AddServiceActivty extends AppCompatActivity {
         builder.addFormDataPart("region[]", parentRegion);
 
         for (int i = 0; i < selectedColoursAddress.size(); i++) {
-            builder.addFormDataPart("city[]", selectedColoursAddress.get(i) + "");
+            builder.addFormDataPart("city[]", selectedColoursAddressId.get(i) + "");
 
         }
 
         builder.addFormDataPart("full_address_secondary", full_address_secondary);
         builder.addFormDataPart("email", email);
-        builder.addFormDataPart("phone", mPhone);
+        builder.addFormDataPart("phone_no", mPhone);
         builder.addFormDataPart("mobile_1", mMobile1);
         builder.addFormDataPart("mobile_2", mMobile2);
         if (providerType.getSelectedItem().toString().equals("Organization")) {
@@ -483,7 +498,7 @@ public class AddServiceActivty extends AppCompatActivity {
         builder.addFormDataPart("cost_interval", mCostInterval);
         builder.addFormDataPart("min_service_hour", mServiceHour);
         builder.addFormDataPart("experience", mExp);
-        builder.addFormDataPart("google_map_script", "");
+        builder.addFormDataPart("google_map_script", "data");
         builder.addFormDataPart("show_in_homepage", "0");
 
         if (showImage != null)
@@ -491,15 +506,15 @@ public class AddServiceActivty extends AppCompatActivity {
 
         final MultipartBody requestBody = builder.build();
         UserInterface postInterface = ApiClient.getApiClient().create(UserInterface.class);
-        Call<UserModel> call = postInterface.updateImage(requestBody);
-        call.enqueue(new Callback<UserModel>() {
+        Call<Object> call = postInterface.addService(requestBody);
+        call.enqueue(new Callback<Object>() {
             @Override
-            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
+            public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
 
             }
 
             @Override
-            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                 fallback();
             }
         });

@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (userModel.getValue() == 1) {
                         Toast.makeText(LoginActivity.this, "Login Successful !", Toast.LENGTH_SHORT).show();
                         SharedPreferenceController.saveLoginLog(LoginActivity.this, true);
-                        SharedPreferenceController.saveUserDetails(LoginActivity.this,userModel.getUserDetails());
+                        SharedPreferenceController.saveUserDetails(LoginActivity.this, userModel.getUserDetails());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -116,8 +116,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        moveTaskToBack(true);
+      /*  moveTaskToBack(true);
         android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
+        System.exit(1);*/
+        finish();
     }
 }

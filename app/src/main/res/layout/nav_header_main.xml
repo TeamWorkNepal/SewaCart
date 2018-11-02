@@ -20,34 +20,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_centerInParent="true"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/header_profile_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_gravity="center"
-            android:src="@drawable/provider_image"
+            android:src="@drawable/default_user"
             app:civ_border_color="#FFF"
             app:civ_border_width="1dp" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/header_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="Hari Nepal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:text="Sewa Cart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/website"
+            android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Designer" />
+            android:text="- Your Service Partner"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

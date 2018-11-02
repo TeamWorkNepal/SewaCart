@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.adapter;
+package sewacart.com.sewacart.finalpackage.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +23,9 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     Context context;
     List<HomeModel.Category> categories;
 
-    public ServiceAdapter(Context context,List<HomeModel.Category> categories) {
+    public ServiceAdapter(Context context, List<HomeModel.Category> categories) {
         this.context = context;
-        this.categories =categories;
+        this.categories = categories;
     }
 
 
@@ -59,10 +59,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
             @Override
             public void onClick(View v) {
 
-                Intent intent =new Intent(context, ServiceListingActivity.class);
-                intent.putExtra("category_id",category.getCategoryId());
-                intent.putExtra("own",false);
+                Intent intent = new Intent(context, ServiceListingActivity.class);
+                intent.putExtra("category_id", category.getCategoryId());
+                intent.putExtra("own", false);
                 context.startActivity(intent);
+
             }
         });
     }

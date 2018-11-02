@@ -1,4 +1,4 @@
-package sewacart.com.sewacart.adapter;
+package sewacart.com.sewacart.finalpackage.adapter;
 
 import android.content.Context;
 import android.content.Intent;

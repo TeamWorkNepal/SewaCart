@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#FFF"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -33,17 +34,26 @@
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/checkOut"
-        android:layout_width="match_parent"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/checkout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="30dp"
-        android:background="@drawable/btn_rect"
-        android:clickable="true"
-        android:padding="12dp"
-        android:text="Check Out"
+        android:layout_below="@+id/viewcart_scroll"
+        android:layout_gravity="center"
+        android:layout_margin="24dp"
         android:visibility="gone"
-        android:textColor="#FFF"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        app:mrl_rippleBackground="#FFFFFF"
+        app:mrl_rippleOverlay="true"
+        app:mrl_rippleRoundedCorners="33dp">
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_rect"
+            android:text="Check Out"
+            android:textColor="#FFF" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
 </RelativeLayout>
