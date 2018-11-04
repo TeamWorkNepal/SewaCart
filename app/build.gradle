@@ -6,8 +6,8 @@ android {
         applicationId "sewacart.com.sewacart"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName "service_1.0"
+        versionCode 2
+        versionName "service_1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

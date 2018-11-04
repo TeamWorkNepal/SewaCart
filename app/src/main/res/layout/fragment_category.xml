@@ -5,9 +5,13 @@
     android:layout_marginTop="?android:attr/actionBarSize"
     android:background="#FFF">
 
-    <ListView
-        android:id="@+id/category_listview"
+    <GridView
+        android:id="@+id/gridview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:numColumns="3"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:verticalSpacing="16dp"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

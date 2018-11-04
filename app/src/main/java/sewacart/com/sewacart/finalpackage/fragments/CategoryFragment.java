@@ -1,19 +1,18 @@
 package sewacart.com.sewacart.finalpackage.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,18 +24,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.finalpackage.activity.SubCategoryListingActivity;
+import sewacart.com.sewacart.finalpackage.adapter.CategoryAdapter;
 import sewacart.com.sewacart.finalpackage.model.CategoryModel;
+import sewacart.com.sewacart.finalpackage.model.HomeModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
 
 
 public class CategoryFragment extends Fragment {
     Context context;
-    @BindView(R.id.category_listview)
-    ListView categoryListview;
-    String[] topCategories;
-    Integer[] topCategoriesId;
+    @BindView(R.id.gridview)
+    GridView gridview;
+    List<CategoryModel> categoryModels = new ArrayList<>();
+    CategoryAdapter categoryAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -49,7 +49,7 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         ButterKnife.bind(this, view);
-
+        categoryAdapter = new CategoryAdapter(context, R.layout.item_service_layout, categoryModels);
         return view;
     }
 
@@ -75,7 +75,13 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<List<CategoryModel>> call, @NonNull final Response<List<CategoryModel>> response) {
                 pDialog.dismiss();
-                topCategories = new String[response.body().size()];
+
+                categoryModels.addAll(response.body());
+
+                gridview.setAdapter(categoryAdapter);
+
+
+               /* topCategories = new String[response.body().size()];
                 topCategoriesId = new Integer[response.body().size()];
 
                 for (int i = 0; i < response.body().size(); i++) {
@@ -86,15 +92,19 @@ public class CategoryFragment extends Fragment {
                     ArrayAdapter adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, topCategories);
                     categoryListview.setAdapter(adapter);
                 }
+
                 categoryListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                         Intent intent = new Intent(context, SubCategoryListingActivity.class);
                         intent.putExtra("data",topCategories[position]);
                         intent.putExtra("data1",topCategoriesId[position]);
                         startActivity(intent);
                     }
-                });
+                });*/
+
+
             }
 
             @Override
@@ -112,4 +122,13 @@ public class CategoryFragment extends Fragment {
         pDialog.show();
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        categoryModels.clear();
+        if (categoryAdapter != null)
+            categoryAdapter.notifyDataSetChanged();
+    }
+    
 }
