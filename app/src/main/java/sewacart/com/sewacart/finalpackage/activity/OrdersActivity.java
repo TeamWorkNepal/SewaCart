@@ -1,5 +1,6 @@
 package sewacart.com.sewacart.finalpackage.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +78,12 @@ public class OrdersActivity extends AppCompatActivity {
     }
 
     private void viewOrders() {
-        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading ...");
-        pDialog.setCancelable(false);
-        pDialog.show();
+
+
+        final ProgressDialog progressBar = new ProgressDialog(OrdersActivity.this);
+        progressBar.setCancelable(false);//you can cancel it by pressing back button
+        progressBar.setMessage("Loading...");
+        progressBar.show();
 
         table.removeAllViews();
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
@@ -94,7 +97,7 @@ public class OrdersActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<OrderModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<OrderModel>> call, @NonNull Response<List<OrderModel>> response) {
-                pDialog.dismiss();
+                progressBar.dismiss();
 
                 if (response.body().size() == 0) {
 
@@ -193,7 +196,7 @@ public class OrdersActivity extends AppCompatActivity {
                         TextView name = new TextView(OrdersActivity.this);
                         name.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
                         name.setText(orderModel.getCustomerName());
-                        name.setPadding(dp, 0, 0, 0);
+                      //  name.setPadding(dp, 0, 0, 0);
                         //    product.setWidth((int) ControllerPixels.convertDpToPixel(150, ViewCartActivity.this));
                         name.setMaxLines(1);
                         name.setHorizontallyScrolling(true);
@@ -210,7 +213,7 @@ public class OrdersActivity extends AppCompatActivity {
                         TextView address = new TextView(OrdersActivity.this);
                         address.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
                         address.setText(orderModel.getDeliveryAddress());
-                        address.setPadding(dp, 0, 0, 0);
+                       // address.setPadding(dp, 0, 0, 0);
                         //    product.setWidth((int) ControllerPixels.convertDpToPixel(150, ViewCartActivity.this));
                         address.setMaxLines(1);
                         address.setHorizontallyScrolling(true);
@@ -224,20 +227,10 @@ public class OrdersActivity extends AppCompatActivity {
                         address.setBackgroundResource(R.drawable.border);
 
 
-/*
-
-                        TextView price = new TextView(OrdersActivity.this);
-                        price.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
-                        price.setText(orderModel.getContact());
-                        price.setGravity(Gravity.CENTER);
-                        price.setPadding(smallmargin, dp, smallmargin, dp);
-                        price.setBackgroundResource(R.drawable.border);
-*/
-
                         TextView phone = new TextView(OrdersActivity.this);
                         phone.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f));
                         phone.setText(orderModel.getContact());
-                        phone.setPadding(dp, 0, 0, 0);
+                      //  phone.setPadding(dp, 0, 0, 0);
                         //    product.setWidth((int) ControllerPixels.convertDpToPixel(150, ViewCartActivity.this));
                         phone.setMaxLines(1);
                         phone.setHorizontallyScrolling(true);
@@ -268,6 +261,14 @@ public class OrdersActivity extends AppCompatActivity {
 
                         table.addView(tableRow);
 
+                        tableRow.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent=new Intent(OrdersActivity.this,OrderDetailsActivity.class);
+                                intent.putExtra("orderId",orderModel.getOrderId());
+                                startActivity(intent);
+                            }
+                        });
 
                     }
                 }
@@ -276,7 +277,7 @@ public class OrdersActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<OrderModel>> call, @NonNull Throwable t) {
-                pDialog.dismiss();
+                progressBar.dismiss();
                 fallback();
             }
         });

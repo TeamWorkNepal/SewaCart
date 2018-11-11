@@ -16,9 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/customTheme"
         tools:replace="android:icon">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <activity
             android:name=".finalpackage.activity.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+          >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -162,8 +165,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
+
+        <service android:name=".finalpackage.rest.firebase.FirebaseMsgService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+
         <activity android:name=".finalpackage.activity.PurchaseActivity"></activity>
         <activity android:name=".finalpackage.activity.CustomerDashboard"></activity>
+        <activity android:name=".finalpackage.activity.OrderDetailsActivity"></activity>
+
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
 import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
+import sewacart.com.sewacart.finalpackage.model.TokenModel;
 import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
@@ -95,15 +97,41 @@ public class RegisterServiceProviderActivity extends AppCompatActivity {
                             if (userModel.getValue() == 1) {
 
                                 Toast.makeText(RegisterServiceProviderActivity.this, "Registration Successful !", Toast.LENGTH_SHORT).show();
-                                SharedPreferenceController.saveLoginLog(RegisterServiceProviderActivity.this, true);
                                 SharedPreferenceController.saveUserDetails(RegisterServiceProviderActivity.this, userModel.getUserDetails());
-                                Intent intent = new Intent(RegisterServiceProviderActivity.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                SharedPreferenceController.saveLoginLog(RegisterServiceProviderActivity.this,true);
+
+                                Call<TokenModel> callToken = userInterface.saveToken("generate_token", SharedPreferenceController.getUserDetails(RegisterServiceProviderActivity.this).getId(), SharedPreferenceController.getToken(RegisterServiceProviderActivity.this));
+                                callToken.enqueue(new Callback<TokenModel>() {
+                                    @Override
+                                    public void onResponse(Call<TokenModel> call1, Response<TokenModel> response1) {
+                                        pDialog.dismiss();
+                                        if (response1.body() != null) {
+
+                                            if (SharedPreferenceController.getUserDetails(RegisterServiceProviderActivity.this).getRole().equals("customer")) {
+                                                FirebaseMessaging.getInstance().subscribeToTopic("customer");
+                                            } else if (SharedPreferenceController.getUserDetails(RegisterServiceProviderActivity.this).getRole().equals("editor")) {
+                                                FirebaseMessaging.getInstance().subscribeToTopic("editor");
+                                            } else {
+                                                FirebaseMessaging.getInstance().subscribeToTopic("administrator");
+                                            }
+
+                                            Intent intent = new Intent(RegisterServiceProviderActivity.this, MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<TokenModel> call, Throwable t) {
+                                        pDialog.dismiss();
+                                    }
+                                });
 
 
                             } else {
+                                pDialog.dismiss();
                                 Toast.makeText(RegisterServiceProviderActivity.this, userModel.getData_mob(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -132,7 +160,7 @@ public class RegisterServiceProviderActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  startActivity(new Intent(RegisterServiceProviderActivity.this, RegisterActivity.class));
+        //  startActivity(new Intent(RegisterServiceProviderActivity.this, RegisterActivity.class));
 
     }
 }

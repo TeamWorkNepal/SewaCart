@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1011775582630",
+    "firebase_url": "https://sewacart.firebaseio.com",
+    "project_id": "sewacart",
+    "storage_bucket": "sewacart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011775582630:android:2a58877c3d7db132",
+        "android_client_info": {
+          "package_name": "sewacart.com.sewacart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011775582630-3q9u4qu0v8lgcft1romdojiv8qr2okap.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sewacart.com.sewacart",
+            "certificate_hash": "33efd5e2cfa1b1c4476cfcd624bc167fd2151141"
+          }
+        },
+        {
+          "client_id": "1011775582630-8be0qniscgutm282b5114e0nemkmfhl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5i4DZEFezmrQ2i-sZwRbSNlD_HN0X-Uc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011775582630-8be0qniscgutm282b5114e0nemkmfhl7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

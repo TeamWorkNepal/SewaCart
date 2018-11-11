@@ -1,6 +1,7 @@
 package sewacart.com.sewacart.finalpackage.activity;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -174,18 +175,17 @@ public class ServiceProviderDetailsActivity extends AppCompatActivity implements
         switch (view.getId()) {
             case R.id.add_to_cart:
 
-                final SweetAlertDialog pDialog = new SweetAlertDialog(ServiceProviderDetailsActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                pDialog.setTitleText("Loading");
-                pDialog.setCancelable(false);
-                pDialog.show();
+                final ProgressDialog progressBar = new ProgressDialog(ServiceProviderDetailsActivity.this);
+                progressBar.setCancelable(false);//you can cancel it by pressing back button
+                progressBar.setMessage("Loading...");
+                progressBar.show();
 
                 final UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
                 Call<AddToCartModel> call = userInterface.addToCart("add_to_cart", providerModel.getId() + "", SharedPreferenceController.getUserDetails(ServiceProviderDetailsActivity.this).getId());
                 call.enqueue(new retrofit2.Callback<AddToCartModel>() {
                     @Override
                     public void onResponse(@NonNull Call<AddToCartModel> call, @NonNull Response<AddToCartModel> response) {
-                        pDialog.dismiss();
+                        progressBar.dismiss();
                         new SweetAlertDialog(ServiceProviderDetailsActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Successful !")
                                 .setContentText("Click ok to proceed ")
@@ -202,12 +202,17 @@ public class ServiceProviderDetailsActivity extends AppCompatActivity implements
 
                     @Override
                     public void onFailure(@NonNull Call<AddToCartModel> call, @NonNull Throwable t) {
-                        pDialog.dismiss();
+                        progressBar.dismiss();
                         Toast.makeText(ServiceProviderDetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
 
+            case R.id.service_provider_book_now:
+                Intent intent = new Intent(ServiceProviderDetailsActivity.this, MainActivity.class);
+                intent.putExtra("goToContact", true);
+                startActivity(intent);
+                break;
         }
     }
 

@@ -13,13 +13,13 @@ public class ViewCartModel {
     private List<Cart> cart = null;
     @SerializedName("total")
     @Expose
-    private Integer total;
+    private Double total;
     @SerializedName("vat")
     @Expose
-    private Integer vat;
+    private Double vat;
     @SerializedName("grand_total")
     @Expose
-    private Integer grandTotal;
+    private Double grandTotal;
 
     public List<Cart> getCart() {
         return cart;
@@ -29,27 +29,27 @@ public class ViewCartModel {
         this.cart = cart;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
-    public Integer getVat() {
+    public Double getVat() {
         return vat;
     }
 
-    public void setVat(Integer vat) {
+    public void setVat(Double vat) {
         this.vat = vat;
     }
 
-    public Integer getGrandTotal() {
+    public Double getGrandTotal() {
         return grandTotal;
     }
 
-    public void setGrandTotal(Integer grandTotal) {
+    public void setGrandTotal(Double grandTotal) {
         this.grandTotal = grandTotal;
     }
 

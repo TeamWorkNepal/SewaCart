@@ -2,11 +2,13 @@ package sewacart.com.sewacart.finalpackage.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +27,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.activity.SignupActivity;
 import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
+import sewacart.com.sewacart.finalpackage.model.TokenModel;
 import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.rest.ApiClient;
 import sewacart.com.sewacart.finalpackage.rest.services.UserInterface;
@@ -74,18 +80,48 @@ public class LoginActivity extends AppCompatActivity {
             call.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
-                    pDialog.dismiss();
+
                     UserModel userModel = response.body();
                     if (userModel.getValue() == 1) {
+
                         Toast.makeText(LoginActivity.this, "Login Successful !", Toast.LENGTH_SHORT).show();
-                        SharedPreferenceController.saveLoginLog(LoginActivity.this, true);
                         SharedPreferenceController.saveUserDetails(LoginActivity.this, userModel.getUserDetails());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        SharedPreferenceController.saveLoginLog(LoginActivity.this,true);
+
+
+                        Call<TokenModel> callToken = userInterface.saveToken("generate_token", SharedPreferenceController.getUserDetails(LoginActivity.this).getId(), SharedPreferenceController.getToken(LoginActivity.this));
+                        callToken.enqueue(new Callback<TokenModel>() {
+                            @Override
+                            public void onResponse(Call<TokenModel> call1, Response<TokenModel> response1) {
+                                pDialog.dismiss();
+                                if (response1.body() != null) {
+
+                                    if (SharedPreferenceController.getUserDetails(LoginActivity.this).getRole().equals("customer")) {
+                                        FirebaseMessaging.getInstance().subscribeToTopic("customer");
+                                    } else if(SharedPreferenceController.getUserDetails(LoginActivity.this).getRole().equals("editor")) {
+                                        FirebaseMessaging.getInstance().subscribeToTopic("editor");
+                                    }else{
+                                        FirebaseMessaging.getInstance().subscribeToTopic("administrator");
+                                    }
+
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<TokenModel> call, Throwable t) {
+                                pDialog.dismiss();
+                            }
+                        });
+
+
 
                     } else {
+                        pDialog.dismiss();
                         Toast.makeText(LoginActivity.this, userModel.getData_mob(), Toast.LENGTH_SHORT).show();
                     }
                 }

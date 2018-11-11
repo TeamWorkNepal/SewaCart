@@ -1,68 +1,52 @@
 package sewacart.com.sewacart.finalpackage.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import sewacart.com.sewacart.R;
-import sewacart.com.sewacart.finalpackage.activity.MainActivity;
+import sewacart.com.sewacart.finalpackage.activity.ServiceListingActivity;
 import sewacart.com.sewacart.finalpackage.activity.SubCategoryListingActivity;
 import sewacart.com.sewacart.finalpackage.model.CategoryModel;
+import sewacart.com.sewacart.finalpackage.model.HomeModel;
 
-public class CategoryAdapter extends ArrayAdapter<CategoryModel> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
-    int layoutId;
     List<CategoryModel> categoryModels;
+    boolean isSub = false;
 
-    public CategoryAdapter(@NonNull Context context, int resource, List<CategoryModel> categoryModels) {
-        super(context, resource, categoryModels);
+    public CategoryAdapter(Context context, List<CategoryModel> categoryModels, boolean isSub) {
         this.context = context;
-        this.layoutId = resource;
         this.categoryModels = categoryModels;
+        this.isSub = isSub;
     }
+
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View row = convertView;
-        RecordHolder holder = null;
-        if (row == null) {
+    public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_single, parent, false);
+        return new CategoryAdapter.ViewHolder(v);
+    }
 
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(layoutId, parent, false);
-            holder = new RecordHolder();
-            holder.txtTitle = (TextView) row.findViewById(R.id.servicec_name);
-            holder.imageItem = (ImageView) row.findViewById(R.id.service_image);
-            row.setTag(holder);
-
-        } else {
-
-            holder = (RecordHolder) row.getTag();
-
-        }
-        final CategoryModel categoryModel = categoryModels.get(position);
-        holder.txtTitle.setText(categoryModel.getCategoryTitle());
-        if (!categoryModel.getCategoryImage().isEmpty()) {
-            final RecordHolder finalHolder = holder;
-            Picasso.with(context).load(categoryModel.getCategoryImage()).placeholder(R.drawable.default_user).networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageItem, new com.squareup.picasso.Callback() {
+    @Override
+    public void onBindViewHolder(@NonNull final CategoryAdapter.ViewHolder holder, int position) {
+        final CategoryModel category = categoryModels.get(position);
+        holder.categoryName.setText(category.getCategoryTitle());
+        //  final String load = "http://sewacart.com/beta/wp-content/uploads/2018/11/wallpaper-android-developer-beautiful-hd-android-robot-design-desktop-wallpapers-android-of-wallpaper-android-developer-5.jpg";
+        if (!category.getCategoryImage().isEmpty()) {
+            Picasso.with(context).load(category.getCategoryImage()).placeholder(R.drawable.default_img).networkPolicy(NetworkPolicy.OFFLINE).into(holder.categoryImage, new com.squareup.picasso.Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -70,29 +54,60 @@ public class CategoryAdapter extends ArrayAdapter<CategoryModel> {
 
                 @Override
                 public void onError() {
-                    Picasso.with(context).load(categoryModel.getCategoryImage()).placeholder(R.drawable.default_user).into(finalHolder.imageItem);
+                    Picasso.with(context).load(category.getCategoryImage()).placeholder(R.drawable.default_img).into(holder.categoryImage);
                 }
 
 
             });
         }
-        row.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (!isSub) {
+            holder.holder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                Intent intent = new Intent(context, SubCategoryListingActivity.class);
-                intent.putExtra("data", "Sub Category");
-                intent.putExtra("data1", categoryModel.getParent());
-                context.startActivity(intent);
-            }
-        });
+                    Intent intent = new Intent(context, SubCategoryListingActivity.class);
+                    intent.putExtra("data", category.getCategoryTitle());
+                    intent.putExtra("data1", category.getCategoryId());
+                    context.startActivity(intent);
 
-        return row;
+                }
+            });
+        } else {
+            holder.holder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    Intent intent = new Intent(context, ServiceListingActivity.class);
+                    intent.putExtra("category_id", category.getCategoryId());
+                    intent.putExtra("own", false);
+                    context.startActivity(intent);
+                }
+            });
+
+
+        }
+
     }
 
-    static class RecordHolder {
-        TextView txtTitle;
-        ImageView imageItem;
+    @Override
+    public int getItemCount() {
+        return categoryModels.size();
+    }
 
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        View holder;
+        ImageView categoryImage;
+        TextView categoryName;
+
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            holder = itemView;
+            categoryImage = holder.findViewById(R.id.category_image);
+            categoryName = holder.findViewById(R.id.category_name);
+
+        }
     }
 }

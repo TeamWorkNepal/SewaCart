@@ -1,6 +1,7 @@
 package sewacart.com.sewacart.finalpackage.activity;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -84,11 +85,11 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadProfile() {
         mainWrapper.setVisibility(View.GONE);
 
-        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+
+        final ProgressDialog progressBar = new ProgressDialog(ProfileActivity.this);
+        progressBar.setCancelable(false);//you can cancel it by pressing back button
+        progressBar.setMessage("Loading...");
+        progressBar.show();
 
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
         Map<String, String> params = new HashMap<String, String>();
@@ -99,7 +100,7 @@ public class ProfileActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
-                pDialog.dismiss();
+                progressBar.dismiss();
                 if (response.body().getValue() == 1) {
                     final UserModel.UserDetails userDetails = response.body().getUserDetails();
                     mainWrapper.setVisibility(View.VISIBLE);
@@ -185,7 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
-                pDialog.dismiss();
+                progressBar.dismiss();
                 fallback();
 
             }

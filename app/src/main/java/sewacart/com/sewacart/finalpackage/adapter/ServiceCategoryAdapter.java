@@ -1,5 +1,6 @@
 package sewacart.com.sewacart.finalpackage.adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.NetworkPolicy;
@@ -72,11 +74,11 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
             @Override
             public void onClick(View v) {
 
-                final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                pDialog.setTitleText("Loading");
-                pDialog.setCancelable(false);
-                pDialog.show();
+                final ProgressDialog progressBar = new ProgressDialog(context);
+                progressBar.setCancelable(false);//you can cancel it by pressing back button
+                progressBar.setMessage("Loading...");
+                progressBar.show();
+
 
                 UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
                 Map<String, String> params = new HashMap<String, String>();
@@ -85,7 +87,7 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
                 call.enqueue(new Callback<ProviderModel>() {
                     @Override
                     public void onResponse(@NonNull Call<ProviderModel> call, @NonNull Response<ProviderModel> response) {
-                        pDialog.dismiss();
+                        progressBar.dismiss();
                         Intent intent = new Intent(context, ServiceProviderDetailsActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("data", Parcels.wrap(response.body()));
@@ -96,7 +98,7 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
 
                     @Override
                     public void onFailure(@NonNull Call<ProviderModel> call, @NonNull Throwable t) {
-                        pDialog.dismiss();
+                        progressBar.dismiss();
                         fallback();
                     }
                 });

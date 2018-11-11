@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     TextView header_name, header_title;
     CircleImageView circleImageView;
 
+    boolean goToContact=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //TODO: Make sure about adminster part and remove all the action part
         Menu nav_Menu = navView.getMenu();
+
+        goToContact = getIntent().getBooleanExtra("goToContact", false);
 
         View header = navView.getHeaderView(0);
         header_name = (TextView) header.findViewById(R.id.header_name);
@@ -97,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (userDetails.getRole().equalsIgnoreCase("administrator")) {
 
-               // nav_Menu.findItem(R.id.myservices).setVisible(false);
-               // nav_Menu.findItem(R.id.purchase).setVisible(false);
-               // nav_Menu.findItem(R.id.listing).setVisible(false);
-              //  nav_Menu.findItem(R.id.dashboard).setVisible(false);
-               // nav_Menu.findItem(R.id.profile).setVisible(false);
+                // nav_Menu.findItem(R.id.myservices).setVisible(false);
+                // nav_Menu.findItem(R.id.purchase).setVisible(false);
+                // nav_Menu.findItem(R.id.listing).setVisible(false);
+                //  nav_Menu.findItem(R.id.dashboard).setVisible(false);
+                // nav_Menu.findItem(R.id.profile).setVisible(false);
 
             } else if (userDetails.getRole().equalsIgnoreCase("customer")) {
 
@@ -305,7 +309,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setItemIconTintList(ContextCompat.getColorStateList(bottomNavigation.getContext(), R.color.nav_item_colors));
         bottomNavigation.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
 
-        setFragment1(homeFragment);
+        if(goToContact){
+            setFragment1(contactFragment);
+        }else{
+            setFragment1(homeFragment);
+        }
+
         bottomNavigation.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override

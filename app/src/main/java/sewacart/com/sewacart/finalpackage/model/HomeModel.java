@@ -75,6 +75,9 @@ public class HomeModel {
         @SerializedName("title")
         @Expose
         private String title;
+        @SerializedName("cat_id")
+        @Expose
+        private String cat_id;
         @SerializedName("service")
         @Expose
         private List<Service> service = null;
@@ -95,6 +98,13 @@ public class HomeModel {
             this.service = service;
         }
 
+        public String getCat_id() {
+            return cat_id;
+        }
+
+        public void setCat_id(String cat_id) {
+            this.cat_id = cat_id;
+        }
     }
 
     public class Category {

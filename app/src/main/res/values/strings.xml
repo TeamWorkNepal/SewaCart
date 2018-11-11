@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Sewa Cart</string>
+    <string name="google_maps_key">AIzaSyAytrJgs9qSRI1KZggO221mobxGMJpvnnc</string>
 
     <string-array name="addresses">
         <item>Kathmandu</item>
@@ -38,6 +39,13 @@
         <item>Home Cleaning and Repairing</item>
         <item>Electronics appliances and Reparing</item>
     </string-array>
+
+    <string-array name="status">
+        <item>Pending</item>
+        <item>Rejected</item>
+        <item>Ready</item>
+    </string-array>
+
 
     <string-array name="second_level_service">
         <item>Ac Service</item>

@@ -60,7 +60,7 @@ public class ReviewFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(context);
         reviewRcy.setLayoutManager(mLayoutManager);
         reviewAdapter = new ReviewAdapter(reviewModels, context);
-    reviewRcy.setNestedScrollingEnabled(false);
+        reviewRcy.setNestedScrollingEnabled(false);
         return view;
     }
 

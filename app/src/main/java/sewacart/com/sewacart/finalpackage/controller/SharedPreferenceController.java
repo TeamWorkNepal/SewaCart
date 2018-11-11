@@ -46,6 +46,25 @@ public class SharedPreferenceController {
 
     }
 
+    public static void saveUserToken(Context context, String token) {
+        prefs = context.getSharedPreferences("userToken", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("token", token);
+        editor.putBoolean("isSavedToken", true);
+        editor.apply();
+    }
+
+    public static boolean isTokenSaved(Context context) {
+        prefs = context.getSharedPreferences("userToken", Context.MODE_PRIVATE);
+        return prefs.getBoolean("isSavedToken", false);
+    }
+
+    public static String getToken(Context context) {
+        prefs = context.getSharedPreferences("userToken", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        return token;
+
+    }
 
     public static UserModel.UserDetails getUserDetails(Context context) {
         prefs = context.getSharedPreferences("userdetails", Context.MODE_PRIVATE);

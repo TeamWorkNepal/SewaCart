@@ -32,6 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.finalpackage.activity.MainActivity;
 import sewacart.com.sewacart.finalpackage.activity.ViewCartActivity;
 import sewacart.com.sewacart.finalpackage.activity.ServiceProviderDetailsActivity;
 import sewacart.com.sewacart.finalpackage.controller.SharedPreferenceController;
@@ -102,6 +103,7 @@ public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceP
                 }
             });
 
+
             holder.addToCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -135,7 +137,7 @@ public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceP
                         @Override
                         public void onFailure(@NonNull Call<AddToCartModel> call, @NonNull Throwable t) {
                             pDialog.dismiss();
-                            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -145,6 +147,9 @@ public class ServiceProviderListingAdapter extends RecyclerView.Adapter<ServiceP
                 @Override
                 public void onClick(View v) {
 
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("goToContact", true);
+                    context.startActivity(intent);
                 }
             });
 

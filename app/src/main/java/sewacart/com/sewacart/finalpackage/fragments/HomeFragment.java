@@ -1,6 +1,8 @@
 package sewacart.com.sewacart.finalpackage.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sewacart.com.sewacart.R;
+import sewacart.com.sewacart.finalpackage.activity.ServiceListingActivity;
 import sewacart.com.sewacart.finalpackage.adapter.ServiceAdapter;
 import sewacart.com.sewacart.finalpackage.adapter.ServiceCategoryAdapter;
 import sewacart.com.sewacart.finalpackage.controller.NetworkDetectController;
@@ -46,7 +49,8 @@ public class HomeFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     LayoutInflater inflater1;
     View inflatedView;
-    TextView title,viewmore;
+    TextView title, viewmore;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -67,7 +71,7 @@ public class HomeFragment extends Fragment {
             pDialog.setContentText("No Internet Connection !");
             pDialog.show();
         }
-        inflater1 = (LayoutInflater)getActivity().getApplicationContext().getSystemService
+        inflater1 = (LayoutInflater) getActivity().getApplicationContext().getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
         return view;
@@ -85,11 +89,12 @@ public class HomeFragment extends Fragment {
 
 
     private void loadAllData() {
-        final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
+
+
+        final ProgressDialog progressBar = new ProgressDialog(context);
+        progressBar.setCancelable(false);//you can cancel it by pressing back button
+        progressBar.setMessage("Loading...");
+        progressBar.show();
 
         UserInterface userInterface = ApiClient.getApiClient().create(UserInterface.class);
         Call<HomeModel> call = userInterface.loadAllData();
@@ -97,17 +102,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<HomeModel> call, @NonNull Response<HomeModel> response) {
 
-                pDialog.dismiss();
+                progressBar.dismiss();
                 final HomeModel homeModel = response.body();
 
                 List<HomeModel.Category> categories = new ArrayList<>();
-                categories.addAll(homeModel.getCategories());
+
+                if (homeModel.getCategories() != null)
+                    categories.addAll(homeModel.getCategories());
+
                 serviceAdapter = new ServiceAdapter(context, categories);
                 recyclerView = new RecyclerView(context);
-                linearLayoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+                linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setAdapter(serviceAdapter);
-                inflatedView = inflater1.inflate(R.layout.item_viewmore,null);
+
+                inflatedView = inflater1.inflate(R.layout.item_viewmore, null);
                 title = inflatedView.findViewById(R.id.item_service_title);
                 viewmore = inflatedView.findViewById(R.id.item_service_view_more);
                 viewmore.setVisibility(View.GONE);
@@ -116,39 +125,54 @@ public class HomeFragment extends Fragment {
                 wrapperRecy.addView(inflatedView);
                 wrapperRecy.addView(recyclerView);
 
-                for(int i =0;i<homeModel.getServiceByCategory().size();i++){
+                if (homeModel.getServiceByCategory() != null) {
 
-                    serviceCategoryAdapter = new ServiceCategoryAdapter(context,homeModel.getServiceByCategory().get(i).getService());
-                    recyclerView = new RecyclerView(context);
-                    linearLayoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.setAdapter(serviceCategoryAdapter);
-                    inflatedView = inflater1.inflate(R.layout.item_viewmore,null);
+                    for (int i = 0; i < homeModel.getServiceByCategory().size(); i++) {
 
-                    if (inflatedView.getParent() != null)
-                        ((ViewGroup) inflatedView.getParent()).removeView(inflatedView);
+                        List<HomeModel.Service> services = new ArrayList<>();
 
-                    title = inflatedView.findViewById(R.id.item_service_title);
-                    viewmore = inflatedView.findViewById(R.id.item_service_view_more);
-                    title.setText(homeModel.getServiceByCategory().get(i).getTitle());
-                    final int finalI = i;
-                    viewmore.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context,homeModel.getServiceByCategory().get(finalI).getTitle(),Toast.LENGTH_SHORT).show();
+                        if (homeModel.getServiceByCategory().get(i).getService() != null) {
+                            serviceCategoryAdapter = new ServiceCategoryAdapter(context, homeModel.getServiceByCategory().get(i).getService());
+                        } else {
+                            serviceCategoryAdapter = new ServiceCategoryAdapter(context, services);
                         }
-                    });
 
-                    wrapperRecy.addView(inflatedView);
-                    wrapperRecy.addView(recyclerView);
 
+                        recyclerView = new RecyclerView(context);
+                        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(serviceCategoryAdapter);
+                        inflatedView = inflater1.inflate(R.layout.item_viewmore, null);
+
+                        if (inflatedView.getParent() != null)
+                            ((ViewGroup) inflatedView.getParent()).removeView(inflatedView);
+
+                        title = inflatedView.findViewById(R.id.item_service_title);
+                        viewmore = inflatedView.findViewById(R.id.item_service_view_more);
+                        title.setText(homeModel.getServiceByCategory().get(i).getTitle());
+
+                        final int finalI1 = i;
+                        viewmore.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(context, ServiceListingActivity.class);
+                                intent.putExtra("category_id", (homeModel.getServiceByCategory().get(finalI1).getCat_id()));
+                                intent.putExtra("own", false);
+                                context.startActivity(intent);
+                            }
+                        });
+
+                        wrapperRecy.addView(inflatedView);
+                        wrapperRecy.addView(recyclerView);
+
+                    }
                 }
 
             }
 
             @Override
             public void onFailure(@NonNull Call<HomeModel> call, @NonNull Throwable t) {
-                pDialog.dismiss();
+                progressBar.dismiss();
                 fallback();
             }
         });

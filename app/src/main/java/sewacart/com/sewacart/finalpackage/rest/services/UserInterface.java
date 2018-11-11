@@ -15,13 +15,16 @@ import sewacart.com.sewacart.finalpackage.activity.CustomerDashboard;
 import sewacart.com.sewacart.finalpackage.model.AddReviewModel;
 import sewacart.com.sewacart.finalpackage.model.AddToCartModel;
 import sewacart.com.sewacart.finalpackage.model.CategoryModel;
+import sewacart.com.sewacart.finalpackage.model.ContactModel;
 import sewacart.com.sewacart.finalpackage.model.CustomerDashboardModel;
 import sewacart.com.sewacart.finalpackage.model.DashboardModel;
 import sewacart.com.sewacart.finalpackage.model.HomeModel;
+import sewacart.com.sewacart.finalpackage.model.OrderDetailsModel;
 import sewacart.com.sewacart.finalpackage.model.OrderModel;
 import sewacart.com.sewacart.finalpackage.model.ParentModel;
 import sewacart.com.sewacart.finalpackage.model.ProviderModel;
 import sewacart.com.sewacart.finalpackage.model.ReviewModel;
+import sewacart.com.sewacart.finalpackage.model.TokenModel;
 import sewacart.com.sewacart.finalpackage.model.UserModel;
 import sewacart.com.sewacart.finalpackage.model.ViewCartModel;
 
@@ -71,6 +74,15 @@ public interface UserInterface {
     @POST("wp-admin/admin-ajax.php")
     Call<AddToCartModel> purchasePoint(@Field("action") String action, @Field("user_id") String user_id, @Field("purchase_point") String purchase_point, @Field("payment_option") String payment_option);
 
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<AddToCartModel> changeOrderStatus(@Field("action") String action, @Field("order_id") String order_id, @Field("status") String status, @Field("provider_change") String provider_change);
+
+    @FormUrlEncoded
+    @POST("wp-admin/admin-ajax.php")
+    Call<TokenModel> saveToken(@Field("action") String action, @Field("user_id") String user_id, @Field("token") String token);
+
+
 
     // GET METHODS
     @GET("wp-json/api/services")
@@ -112,5 +124,13 @@ public interface UserInterface {
     @GET("wp-json/api/parentChildCategories")
     Call<List<CategoryModel>> getCategories(@QueryMap Map<String, String> params);
 
+    @GET("wp-json/api/OrdersDetails")
+    Call<OrderDetailsModel> getOrderDetails(@QueryMap Map<String, String> params);
 
+    //TODO: WORK ON MAIL FROM HERE
+    @GET("mail/sendemail.php")
+    Call<Integer> sendMail(@QueryMap Map<String, String> params);
+
+    @GET("wp-json/api/contactdetail")
+    Call<ContactModel> getContact();
 }
